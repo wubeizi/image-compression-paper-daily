@@ -21,6 +21,7 @@ import re
 import time
 import xml.etree.ElementTree as ET
 from collections import defaultdict
+from difflib import SequenceMatcher
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -48,6 +49,10 @@ SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY", "").strip()
 
 ARXIV_API = "https://export.arxiv.org/api/query"
 SERPAPI_API = "https://serpapi.com/search.json"
+GITHUB_API = "https://api.github.com"
+MAX_CODE_LOOKUPS = int(os.getenv("MAX_CODE_LOOKUPS", "20"))
+GITHUB_API_DELAY = float(os.getenv("GITHUB_API_DELAY", "0.4"))
+SOURCE_ORDER = {"arXiv": 0, "Google Scholar": 1}
 
 ARXIV_CATEGORIES = ["cs.CV", "cs.MM", "eess.IV", "cs.IT", "cs.LG"]
 
@@ -111,8 +116,7 @@ TOPICS: dict[str, dict[str, Any]] = {
             "perceptual image compression", "bits per pixel", "bpp", "rate-distortion",
         ],
         "method_signals": [
-            "bpp", "bits per pixel", "psnr", "ms-ssim", "lpips", "dists", "perceptual",
-            "semantic", "generative", "diffusion", "rate-distortion", "low bitrate",
+            "perceptual", "semantic", "generative", "diffusion", "rate-distortion", "low bitrate",
         ],
         "exclude": [
             "video compression", "speech compression", "audio compression", "text compression",
@@ -208,8 +212,25 @@ def compact_authors(authors: list[str], limit: int = 3) -> str:
 
 
 def extract_github_url(text: str) -> str | None:
-    match = re.search(r"https?://(?:www\.)?github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", text or "")
+    match = re.search(r"https?://(?:www\.)?github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:/tree/[A-Za-z0-9_.-]+)?", text or "")
     return match.group(0).rstrip(".,)") if match else None
+
+
+def github_url_from_obj(obj: Any) -> str | None:
+    """Find a GitHub repository URL anywhere in a nested API response object."""
+    if isinstance(obj, str):
+        return extract_github_url(obj)
+    if isinstance(obj, dict):
+        for value in obj.values():
+            found = github_url_from_obj(value)
+            if found:
+                return found
+    elif isinstance(obj, list):
+        for value in obj:
+            found = github_url_from_obj(value)
+            if found:
+                return found
+    return None
 
 
 def github_from_resources(resources: list[dict[str, Any]] | None) -> str | None:
@@ -286,13 +307,16 @@ def search_arxiv(query: str) -> list[dict[str, Any]]:
         except ValueError:
             date = RUN_AT.date().isoformat()
 
+        link_urls = [link.attrib.get("href", "") for link in entry.findall(f"{{{atom}}}link")]
+        code_url = extract_github_url(comment) or extract_github_url(abstract) or github_url_from_obj(link_urls)
+
         papers.append({
             "title": title,
             "authors": authors,
             "date": date,
             "paper_url": arxiv_url,
             "pdf_url": pdf_url or arxiv_url,
-            "code_url": extract_github_url(comment),
+            "code_url": code_url,
             "abstract": abstract,
             "source": "arXiv",
             "arxiv_id": arxiv_id,
@@ -360,6 +384,7 @@ def search_google_scholar(query: str) -> list[dict[str, Any]]:
         date = f"{year}" if year else RUN_AT.date().isoformat()
 
         resources = item.get("resources") or []
+        code_url = github_from_resources(resources) or github_url_from_obj(item)
         cited_by = (item.get("inline_links") or {}).get("cited_by") or {}
         versions = (item.get("inline_links") or {}).get("versions") or {}
 
@@ -370,7 +395,7 @@ def search_google_scholar(query: str) -> list[dict[str, Any]]:
             "year": year,
             "paper_url": paper_url,
             "pdf_url": None,
-            "code_url": github_from_resources(resources),
+            "code_url": code_url,
             "abstract": snippet,
             "source": "Google Scholar",
             "scholar_result_id": item.get("result_id"),
@@ -383,10 +408,120 @@ def search_google_scholar(query: str) -> list[dict[str, Any]]:
     return papers
 
 
+def github_repo_score(paper: dict[str, Any], repo: dict[str, Any]) -> float:
+    """Estimate whether a public GitHub repository is the implementation for a paper."""
+    title = normalize_text(paper.get("title", ""))
+    arxiv_id = normalize_text(paper.get("arxiv_id", ""))
+    repo_text = normalize_text(" ".join([
+        str(repo.get("name") or ""),
+        str(repo.get("full_name") or ""),
+        str(repo.get("description") or ""),
+        " ".join(repo.get("topics") or []),
+    ]))
+
+    if arxiv_id and arxiv_id in repo_text:
+        return 1.0
+    if title and title in repo_text:
+        return 1.0
+
+    title_tokens = {t for t in title.split() if len(t) >= 4}
+    repo_tokens = set(repo_text.split())
+    if not title_tokens:
+        return 0.0
+    overlap = len(title_tokens & repo_tokens) / max(1, len(title_tokens))
+    name_ratio = SequenceMatcher(None, title, normalize_text(str(repo.get("name") or ""))).ratio()
+    return 0.65 * overlap + 0.35 * name_ratio
+
+
+def discover_github_code(paper: dict[str, Any]) -> str | None:
+    """Find a likely official/public implementation via GitHub repository search.
+
+    This is a code-link enrichment step only; it does not change the paper source.
+    """
+    title = clean_text(paper.get("title"))
+    if not title:
+        return None
+
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "image-compression-paper-daily"}
+    query = f'"{title}" in:name,description,readme'
+    try:
+        response = SESSION.get(
+            f"{GITHUB_API}/search/repositories",
+            params={"q": query, "per_page": 5, "sort": "updated", "order": "desc"},
+            headers=headers,
+            timeout=HTTP_TIMEOUT,
+        )
+        if response.status_code == 403:
+            print("  GitHub code lookup rate-limited; skipping remaining enrichment.")
+            return None
+        response.raise_for_status()
+        items = response.json().get("items", [])
+    except (requests.RequestException, ValueError) as exc:
+        print(f"  GitHub code lookup failed: {exc}")
+        return None
+
+    best_url = None
+    best_score = 0.0
+    for repo in items:
+        score = github_repo_score(paper, repo)
+        if score > best_score:
+            best_score = score
+            best_url = repo.get("html_url")
+
+    # Conservative threshold: only publish a repository when the title match is strong.
+    if best_url and best_score >= 0.56:
+        return best_url.rstrip("/")
+    return None
+
+
+def enrich_missing_code_links(
+    by_topic: dict[str, list[dict[str, Any]]],
+    current_run: dict[str, dict[str, Any]],
+) -> None:
+    """Fill missing GitHub links without changing any other paper metadata."""
+    unique: dict[str, dict[str, Any]] = {}
+    for papers in by_topic.values():
+        for paper in papers:
+            unique.setdefault(stable_id(paper), paper)
+
+    # Prioritize strong/recent matches and arXiv records first.
+    candidates = [p for p in unique.values() if not p.get("code_url")]
+    candidates.sort(
+        key=lambda p: (
+            0 if p.get("source") == "arXiv" else 1,
+            -int(p.get("relevance_score", 0)),
+            str(p.get("date", "")),
+        )
+    )
+
+    lookups = 0
+    code_map: dict[str, str] = {}
+    for paper in candidates:
+        if lookups >= MAX_CODE_LOOKUPS:
+            break
+        code = discover_github_code(paper)
+        lookups += 1
+        if code:
+            pid = stable_id(paper)
+            code_map[pid] = code
+        time.sleep(GITHUB_API_DELAY)
+
+    if not code_map:
+        return
+
+    for pid, code in code_map.items():
+        if pid in current_run:
+            current_run[pid]["code_url"] = code
+        for papers in by_topic.values():
+            for paper in papers:
+                if stable_id(paper) == pid and not paper.get("code_url"):
+                    paper["code_url"] = code
+
+
 def merge_papers(old: dict[str, Any] | None, new: dict[str, Any]) -> dict[str, Any]:
     if not old:
         result = dict(new)
-        result["sources"] = sorted(set(new.get("sources", [new.get("source", "")])) - {""})
+        result["sources"] = sorted(set(new.get("sources", [new.get("source", "")])) - {""}, key=lambda s: (SOURCE_ORDER.get(s, 99), s))
         return result
 
     merged = dict(old)
@@ -417,7 +552,8 @@ def merge_papers(old: dict[str, Any] | None, new: dict[str, Any]) -> dict[str, A
 
     merged["sources"] = sorted(
         (set(old.get("sources", [old_source] if old_source else []))
-         | set(new.get("sources", [new_source] if new_source else []))) - {""}
+         | set(new.get("sources", [new_source] if new_source else []))) - {""},
+        key=lambda s: (SOURCE_ORDER.get(s, 99), s),
     )
     merged["topics"] = sorted(set(old.get("topics", [])) | set(new.get("topics", [])))
     merged["matched_queries"] = sorted(set(old.get("matched_queries", [])) | set(new.get("matched_queries", [])))
@@ -593,6 +729,7 @@ def collect() -> tuple[dict[str, list[dict[str, Any]]], dict[str, dict[str, Any]
             pid = stable_id(paper)
             current_run[pid] = merge_papers(current_run.get(pid), paper)
 
+    enrich_missing_code_links(by_topic, current_run)
     return by_topic, current_run
 
 
