@@ -33,6 +33,8 @@ BASE_DIR = Path(__file__).resolve().parent
 PAPERS_FILE = BASE_DIR / "papers.json"
 HISTORY_FILE = BASE_DIR / "history.json"
 README_FILE = BASE_DIR / "README.md"
+DOCS_DIR = BASE_DIR / "docs"
+DOCS_INDEX_FILE = DOCS_DIR / "index.md"
 
 TZ = ZoneInfo(os.getenv("PAPER_TIMEZONE", "Asia/Tokyo"))
 RUN_AT = datetime.now(TZ)
@@ -706,7 +708,16 @@ def generate_readme(
         "arXiv API: https://info.arxiv.org/help/api/user-manual.html",
         "",
     ]
-    README_FILE.write_text("\n".join(lines), encoding="utf-8")
+
+    readme_text = "\n".join(lines)
+    README_FILE.write_text(readme_text, encoding="utf-8")
+
+    # Keep the GitHub Pages source synchronized with README.md.  The Pages
+    # workflow builds docs/ with Jekyll, so the generated site and repository
+    # README always describe exactly the same paper snapshot.
+    DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    front_matter = "---\nlayout: default\ntitle: Image Compression Paper Daily\n---\n\n"
+    DOCS_INDEX_FILE.write_text(front_matter + readme_text, encoding="utf-8")
 
 
 def save_current_run(by_topic: dict[str, list[dict[str, Any]]]) -> None:
