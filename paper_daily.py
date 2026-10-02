@@ -1,135 +1,152 @@
 #!/usr/bin/env python3
-"""Daily paper collector for learned/generative/extreme image compression and VQ.
+"""High-precision daily paper collector for image compression research.
 
 Sources:
-- arXiv official Atom API
-- OpenAlex Works API
+  1) arXiv official API
+  2) Google Scholar search results via SerpApi
 
-The script is intentionally dependency-light and keeps structured JSON as the
-source of truth. README.md is generated from that structured data.
+Why SerpApi instead of scraping scholar.google.com directly?
+Direct HTML scraping is brittle and can trigger Google Scholar anti-bot measures.
+SerpApi exposes structured Google Scholar organic results and handles the
+retrieval/parsing layer. The API key is read from the SERPAPI_API_KEY
+environment variable and should never be committed to Git.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
 import time
-import hashlib
+import xml.etree.ElementTree as ET
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
-import xml.etree.ElementTree as ET
 
 import requests
-
-# -----------------------------------------------------------------------------
-# Configuration
-# -----------------------------------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent
 PAPERS_FILE = BASE_DIR / "papers.json"
 HISTORY_FILE = BASE_DIR / "history.json"
 README_FILE = BASE_DIR / "README.md"
 
-TIMEZONE = ZoneInfo(os.getenv("PAPER_TIMEZONE", "Asia/Tokyo"))
-RUN_AT = datetime.now(TIMEZONE)
-LOOKBACK_DAYS = int(os.getenv("LOOKBACK_DAYS", "60"))
-PER_QUERY = int(os.getenv("PER_QUERY", "25"))
-PER_TOPIC = int(os.getenv("PER_TOPIC", "15"))
-ARXIV_DELAY = float(os.getenv("ARXIV_DELAY", "3.0"))
-OPENALEX_DELAY = float(os.getenv("OPENALEX_DELAY", "0.5"))
+TZ = ZoneInfo(os.getenv("PAPER_TIMEZONE", "Asia/Tokyo"))
+RUN_AT = datetime.now(TZ)
+LOOKBACK_DAYS = int(os.getenv("LOOKBACK_DAYS", "30"))
+SCHOLAR_NUM = int(os.getenv("SCHOLAR_NUM", "20"))
+PER_TOPIC = int(os.getenv("PER_TOPIC", "12"))
 HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "30"))
-
-# Optional: set this as a GitHub Actions repository variable or local env var.
+ARXIV_DELAY = float(os.getenv("ARXIV_DELAY", "3.0"))
 CONTACT_EMAIL = os.getenv("CONTACT_EMAIL", "")
+SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY", "").strip()
 
 ARXIV_API = "https://export.arxiv.org/api/query"
-OPENALEX_API = "https://api.openalex.org/works"
+SERPAPI_API = "https://serpapi.com/search.json"
 
-# The search vocabulary is deliberately redundant. The relevance filter below
-# removes many broad/noisy matches, while the multiple queries improve recall.
+ARXIV_CATEGORIES = ["cs.CV", "cs.MM", "eess.IV", "cs.IT", "cs.LG"]
+
+# Keep the daily Google Scholar request count small. Four Scholar searches per
+# run stay comfortably below SerpApi's current 250-search/month free quota.
+# Each topic uses one carefully constructed query instead of many broad queries.
 TOPICS: dict[str, dict[str, Any]] = {
     "Learned Image Compression": {
-        "queries": [
-            'learned image compression',
-            'learned image coding',
-            'neural image compression',
-            'deep image compression',
-            'end-to-end image compression',
-            'learned lossy image compression',
+        "scholar_query": '"learned image compression" OR "neural image compression" OR "learned image coding" OR "end-to-end image compression"',
+        "arxiv_queries": [
+            '(ti:"learned image compression" OR abs:"learned image compression")',
+            '(ti:"neural image compression" OR abs:"neural image compression")',
         ],
-        "required_any": [
-            "compression", "compress", "coding", "codec", "rate-distortion",
-            "entropy model", "entropy coding",
+        "positive": [
+            "image compression", "image coding", "image codec", "learned image compression",
+            "neural image compression", "rate distortion", "rate-distortion", "entropy model",
+            "hyperprior", "latent representation", "learned image coding", "neural image coding",
         ],
-        "exclude_any": [],
+        "method_signals": [
+            "hyperprior", "entropy model", "entropy coding", "autoregressive", "context model",
+            "variational", "vae", "transformer", "attention", "latent", "quantization",
+            "rate-distortion", "rate distortion",
+        ],
+        "exclude": [
+            "video compression", "speech compression", "audio compression", "text compression",
+            "model compression", "scientific data compression", "point cloud compression",
+            "gaussian splatting", "3d gaussian", "mesh compression", "data compression",
+        ],
+        "gate": "learned",
     },
     "Generative Image Compression": {
-        "queries": [
-            'generative image compression',
-            'generative compression image',
-            'generative learned image compression',
-            'generative image coding',
-            'diffusion image compression',
-            'generative compression diffusion',
+        "scholar_query": '"generative image compression" OR "diffusion image compression" OR "generative image coding" OR "generative compression" image',
+        "arxiv_queries": [
+            '(ti:"generative image compression" OR abs:"generative image compression")',
+            '(ti:"diffusion image compression" OR abs:"diffusion image compression")',
         ],
-        "required_any": [
-            "compression", "compress", "coding", "codec", "rate-distortion",
+        "positive": [
+            "generative image compression", "diffusion image compression", "generative image coding",
+            "generative compression", "semantic image compression", "perceptual image compression",
+            "semantic coding", "generative codec", "diffusion codec",
         ],
-        "exclude_any": [
-            "text compression", "audio compression", "video compression only",
+        "method_signals": [
+            "diffusion", "generative", "latent diffusion", "score model", "text prompt",
+            "semantic", "perceptual", "adversarial", "gan", "text-guided", "generative model",
         ],
+        "exclude": [
+            "video compression", "speech compression", "audio compression", "text compression",
+            "medical image registration", "3d gaussian", "mesh compression", "scientific data",
+        ],
+        "gate": "generative",
     },
     "Extreme Image Compression": {
-        "queries": [
-            'extreme image compression',
-            'extreme compression image',
-            'ultra low bitrate image compression',
-            'very low bitrate image compression',
-            'low bitrate learned image compression',
-            'perceptual image compression low bitrate',
+        "scholar_query": '"extreme image compression" OR "ultra low bitrate" image compression OR "very low bitrate" image compression OR "low bitrate image compression"',
+        "arxiv_queries": [
+            '(ti:"extreme image compression" OR abs:"extreme image compression")',
+            '(ti:"low bitrate" OR abs:"low bitrate") AND (ti:"image compression" OR abs:"image compression")',
         ],
-        "required_any": [
-            "image", "compression", "compress", "codec", "coding", "bitrate",
+        "positive": [
+            "extreme image compression", "ultra low bitrate", "very low bitrate",
+            "low bitrate image compression", "low-rate image compression", "low rate image compression",
+            "perceptual image compression", "bits per pixel", "bpp", "rate-distortion",
         ],
-        "exclude_any": [
-            "text compression", "model compression only", "video compression only",
+        "method_signals": [
+            "bpp", "bits per pixel", "psnr", "ms-ssim", "lpips", "dists", "perceptual",
+            "semantic", "generative", "diffusion", "rate-distortion", "low bitrate",
         ],
+        "exclude": [
+            "video compression", "speech compression", "audio compression", "text compression",
+            "model compression", "scientific data compression", "point cloud compression",
+            "3d gaussian", "mesh compression", "hyperspectral", "medical image", "hardware compression",
+        ],
+        "gate": "extreme",
     },
     "Vector Quantization": {
-        "queries": [
-            'vector quantization image compression',
-            'vector-quantized image compression',
-            'vector quantised image compression',
-            'vq image compression',
-            'residual vector quantization image compression',
-            'rvq image compression',
-            'vq-vae image compression',
+        "scholar_query": '("vector quantized" OR "vector-quantized" OR "vector quantization" OR "residual vector quantization" OR RVQ OR "VQ-VAE") AND ("image compression" OR "image coding" OR "image codec")',
+        "arxiv_queries": [
+            '(ti:"vector quantized" OR abs:"vector quantized" OR ti:"vector-quantization" OR abs:"vector-quantization") AND (ti:"image compression" OR abs:"image compression")',
+            '(ti:"residual vector quantization" OR abs:"residual vector quantization") AND (ti:"image compression" OR abs:"image compression")',
         ],
-        "required_any": [
-            "image", "compression", "compress", "codec", "coding", "rate-distortion",
+        "positive": [
+            "vector quantization", "vector-quantized", "vector quantized", "residual vector quantization",
+            "rvq", "vq-vae", "codebook", "codebooks", "quantizer", "quantization", "image compression",
+            "image coding", "image codec",
         ],
-        "exclude_any": [
-            "text compression", "audio compression", "speech compression", "video compression only",
+        "method_signals": [
+            "vector quantization", "vector-quantized", "residual vector quantization", "rvq",
+            "codebook", "codebooks", "vq-vae", "product quantization", "multi-codebook", "quantizer",
         ],
+        "exclude": [
+            "video compression", "speech coding", "audio codec", "text compression", "llm compression",
+            "language model", "model compression", "point cloud compression", "3d gaussian",
+            "mesh compression", "neural audio codec", "speech codec",
+        ],
+        "gate": "vq",
     },
 }
 
-
-# -----------------------------------------------------------------------------
-# Utilities
-# -----------------------------------------------------------------------------
-
 SESSION = requests.Session()
 SESSION.headers.update({
-    "User-Agent": (
-        "image-compression-paper-daily/1.0"
-        + (f" (mailto:{CONTACT_EMAIL})" if CONTACT_EMAIL else "")
-    )
+    "User-Agent": "image-compression-paper-daily/3.0"
+    + (f" (mailto:{CONTACT_EMAIL})" if CONTACT_EMAIL else "")
 })
 
 
@@ -146,171 +163,121 @@ def load_json(path: Path, default: Any) -> Any:
 
 def save_json(path: Path, obj: Any) -> None:
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(
-        json.dumps(obj, ensure_ascii=False, indent=2, sort_keys=False),
-        encoding="utf-8",
-    )
+    tmp.write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
     tmp.replace(path)
 
 
 def clean_text(text: str | None) -> str:
-    text = text or ""
-    text = re.sub(r"\s+", " ", text)
-    return text.strip()
+    return re.sub(r"\s+", " ", text or "").strip()
 
 
 def normalize_text(text: str) -> str:
-    text = text.lower()
+    text = clean_text(text).lower()
     text = text.replace("‐", "-").replace("‑", "-").replace("–", "-").replace("—", "-")
-    text = re.sub(r"[^a-z0-9]+", " ", text)
-    return re.sub(r"\s+", " ", text).strip()
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9.+/-]+", " ", text)).strip()
 
 
 def normalize_title(title: str) -> str:
-    return normalize_text(title)
+    title = normalize_text(title)
+    title = re.sub(r"\b(v\d+)\b$", "", title).strip()
+    return title
+
+
+def stable_id(paper: dict[str, Any]) -> str:
+    title = normalize_title(paper.get("title", ""))
+    if title:
+        return "title:" + hashlib.sha1(title.encode("utf-8")).hexdigest()
+    if paper.get("arxiv_id"):
+        return "arxiv:" + paper["arxiv_id"].lower()
+    result_id = paper.get("scholar_result_id")
+    if result_id:
+        return "scholar:" + str(result_id)
+    url = paper.get("paper_url") or ""
+    parsed = urlparse(url)
+    return "url:" + (parsed.netloc + parsed.path).lower()
 
 
 def compact_authors(authors: list[str], limit: int = 3) -> str:
-    authors = [clean_text(x) for x in authors if clean_text(x)]
-    if not authors:
+    names = [clean_text(x) for x in authors if clean_text(x)]
+    if not names:
         return "-"
-    shown = authors[:limit]
-    result = ", ".join(shown)
-    if len(authors) > limit:
-        result += " et al."
-    return result
+    text = ", ".join(names[:limit])
+    return text + (" et al." if len(names) > limit else "")
 
 
 def extract_github_url(text: str) -> str | None:
-    match = re.search(r"https?://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", text or "")
+    match = re.search(r"https?://(?:www\.)?github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", text or "")
     return match.group(0).rstrip(".,)") if match else None
 
 
-def paper_id(paper: dict[str, Any]) -> str:
-    """Cross-source stable ID based primarily on normalized title.
-
-    arXiv and OpenAlex frequently represent the same work with different IDs.
-    A title-based key therefore gives us a simple cross-source deduplication
-    mechanism while still retaining arXiv IDs and DOIs as metadata.
-    """
-    title_key = normalize_title(paper.get("title", ""))
-    if title_key:
-        return "title:" + hashlib.sha1(title_key.encode("utf-8")).hexdigest()
-
-    if paper.get("arxiv_id"):
-        return f"arxiv:{paper['arxiv_id']}"
-
-    if paper.get("doi"):
-        doi = paper["doi"].lower().strip()
-        doi = re.sub(r"^https?://doi.org/", "", doi)
-        return f"doi:{doi}"
-
-    url = paper.get("paper_url") or ""
-    if url:
-        parsed = urlparse(url)
-        path = parsed.path.rstrip("/")
-        url_key = f"{parsed.netloc.lower()}{path.lower()}"
-        if url_key:
-            return f"url:{url_key}"
-
-    return "paper:unknown"
+def github_from_resources(resources: list[dict[str, Any]] | None) -> str | None:
+    for resource in resources or []:
+        link = resource.get("link", "")
+        found = extract_github_url(link)
+        if found:
+            return found
+    return None
 
 
-def score_relevance(paper: dict[str, Any], topic: dict[str, Any]) -> int:
-    """Small deterministic score used only to remove obvious noise."""
-    title = normalize_text(paper.get("title", ""))
-    abstract = normalize_text(paper.get("abstract", ""))
-    combined = f"{title} {abstract}"
-
-    if any(phrase in combined for phrase in topic.get("exclude_any", [])):
-        return -100
-
-    required = [normalize_text(x) for x in topic.get("required_any", [])]
-    hits = sum(1 for item in required if item and item in combined)
-
-    score = 0
-    if any(item and item in title for item in required):
-        score += 3
-    score += min(hits, 5)
-
-    compression_terms = [
-        "image compression", "image coding", "image codec", "neural compression",
-        "learned compression", "rate distortion", "rate-distortion", "entropy model",
-    ]
-    score += sum(2 for item in compression_terms if item in combined)
-
-    return score
+def category_query() -> str:
+    return " OR ".join(f"cat:{c}" for c in ARXIV_CATEGORIES)
 
 
-def merge_paper(existing: dict[str, Any] | None, new: dict[str, Any]) -> dict[str, Any]:
-    if not existing:
-        return new
-
-    merged = dict(existing)
-    for key, value in new.items():
-        if value not in (None, "", [], {}):
-            merged[key] = value
-
-    merged["topics"] = sorted(set(existing.get("topics", [])) | set(new.get("topics", [])))
-    merged["matched_queries"] = sorted(
-        set(existing.get("matched_queries", [])) | set(new.get("matched_queries", []))
-    )
-    return merged
+def arxiv_date_range() -> str:
+    now_utc = RUN_AT.astimezone(timezone.utc)
+    start = now_utc - timedelta(days=LOOKBACK_DAYS)
+    return f"[{start.strftime('%Y%m%d%H%M')} TO {now_utc.strftime('%Y%m%d%H%M')}]"
 
 
-# -----------------------------------------------------------------------------
-# arXiv
-# -----------------------------------------------------------------------------
-
-ATOM = "http://www.w3.org/2005/Atom"
-ARXIV_NS = "http://arxiv.org/schemas/atom"
-
-
-def arxiv_text(element: ET.Element | None, path: str = "") -> str:
-    if element is None:
-        return ""
-    child = element.find(path) if path else element
-    return clean_text(child.text if child is not None else "")
-
-
-def search_arxiv(query: str, max_results: int = PER_QUERY) -> list[dict[str, Any]]:
+def search_arxiv(query: str) -> list[dict[str, Any]]:
+    search_query = f"({query}) AND ({category_query()}) AND submittedDate:{arxiv_date_range()}"
     params = {
-        "search_query": f'all:"{query}"',
+        "search_query": search_query,
         "start": 0,
-        "max_results": max_results,
+        "max_results": 20,
         "sortBy": "submittedDate",
         "sortOrder": "descending",
     }
-
     response = SESSION.get(ARXIV_API, params=params, timeout=HTTP_TIMEOUT)
     response.raise_for_status()
-
     root = ET.fromstring(response.content)
+
     papers: list[dict[str, Any]] = []
+    atom = "http://www.w3.org/2005/Atom"
+    arxiv_ns = "http://arxiv.org/schemas/atom"
 
-    for entry in root.findall(f"{{{ATOM}}}entry"):
-        title = arxiv_text(entry, f"{{{ATOM}}}title")
-        summary = arxiv_text(entry, f"{{{ATOM}}}summary")
-        published = arxiv_text(entry, f"{{{ATOM}}}published")
-        arxiv_url = arxiv_text(entry, f"{{{ATOM}}}id")
+    for entry in root.findall(f"{{{atom}}}entry"):
+        title_el = entry.find(f"{{{atom}}}title")
+        summary_el = entry.find(f"{{{atom}}}summary")
+        id_el = entry.find(f"{{{atom}}}id")
+        published_el = entry.find(f"{{{atom}}}published")
+        title = clean_text(title_el.text if title_el is not None else "")
+        abstract = clean_text(summary_el.text if summary_el is not None else "")
+        arxiv_url = clean_text(id_el.text if id_el is not None else "")
+        published = clean_text(published_el.text if published_el is not None else "")
+        if not title or not arxiv_url:
+            continue
 
-        arxiv_id = arxiv_url.rsplit("/", 1)[-1]
-        arxiv_id = re.sub(r"v\d+$", "", arxiv_id)
-
-        authors = []
-        for author in entry.findall(f"{{{ATOM}}}author"):
-            name = arxiv_text(author, f"{{{ATOM}}}name")
-            if name:
-                authors.append(name)
+        arxiv_id = re.sub(r"v\d+$", "", arxiv_url.rsplit("/", 1)[-1])
+        authors: list[str] = []
+        for author in entry.findall(f"{{{atom}}}author"):
+            name_el = author.find(f"{{{atom}}}name")
+            if name_el is not None and name_el.text:
+                authors.append(clean_text(name_el.text))
 
         pdf_url = None
-        for link in entry.findall(f"{{{ATOM}}}link"):
+        for link in entry.findall(f"{{{atom}}}link"):
             if link.attrib.get("title") == "pdf":
                 pdf_url = link.attrib.get("href")
                 break
 
-        comment = arxiv_text(entry, f"{{{ARXIV_NS}}}comment")
-        code_url = extract_github_url(comment)
+        comment_el = entry.find(f"{{{arxiv_ns}}}comment")
+        journal_el = entry.find(f"{{{arxiv_ns}}}journal_ref")
+        comment = clean_text(comment_el.text if comment_el is not None else "")
+        journal_ref = clean_text(journal_el.text if journal_el is not None else "")
+        categories = [x.attrib.get("term", "") for x in entry.findall(f"{{{atom}}}category")]
+        primary_category_el = entry.find(f"{{{arxiv_ns}}}primary_category")
+        primary_category = primary_category_el.attrib.get("term") if primary_category_el is not None else None
 
         try:
             date = datetime.fromisoformat(published.replace("Z", "+00:00")).date().isoformat()
@@ -318,304 +285,453 @@ def search_arxiv(query: str, max_results: int = PER_QUERY) -> list[dict[str, Any
             date = RUN_AT.date().isoformat()
 
         papers.append({
-            "title": clean_text(title),
+            "title": title,
             "authors": authors,
             "date": date,
             "paper_url": arxiv_url,
             "pdf_url": pdf_url or arxiv_url,
-            "code_url": code_url,
-            "abstract": summary,
+            "code_url": extract_github_url(comment),
+            "abstract": abstract,
             "source": "arXiv",
             "arxiv_id": arxiv_id,
             "doi": None,
+            "comment": comment,
+            "journal_ref": journal_ref,
+            "categories": categories,
+            "primary_category": primary_category,
         })
 
     time.sleep(ARXIV_DELAY)
     return papers
 
 
-# -----------------------------------------------------------------------------
-# OpenAlex
-# -----------------------------------------------------------------------------
+def search_google_scholar(query: str) -> list[dict[str, Any]]:
+    if not SERPAPI_API_KEY:
+        raise RuntimeError("SERPAPI_API_KEY is not set; add it as a GitHub Actions secret.")
 
-
-def reconstruct_abstract(inverted_index: dict[str, list[int]] | None) -> str:
-    if not inverted_index:
-        return ""
-
-    positions: list[tuple[int, str]] = []
-    for word, indexes in inverted_index.items():
-        for index in indexes:
-            positions.append((index, word))
-
-    positions.sort(key=lambda x: x[0])
-    return " ".join(word for _, word in positions)
-
-
-def search_openalex(query: str, max_results: int = PER_QUERY) -> list[dict[str, Any]]:
-    since = (RUN_AT.date() - timedelta(days=LOOKBACK_DAYS)).isoformat()
     params = {
-        "search": query,
-        "per-page": max_results,
-        "sort": "publication_date:desc",
-        "filter": f"from_publication_date:{since}",
+        "engine": "google_scholar",
+        "q": query,
+        "api_key": SERPAPI_API_KEY,
+        "hl": "en",
+        "as_sdt": "0,5",
+        "as_vis": "0",
+        "scisbd": "1",
+        "num": SCHOLAR_NUM,
+        "filter": "1",
     }
-    if CONTACT_EMAIL:
-        params["mailto"] = CONTACT_EMAIL
-
-    response = SESSION.get(OPENALEX_API, params=params, timeout=HTTP_TIMEOUT)
+    response = SESSION.get(SERPAPI_API, params=params, timeout=HTTP_TIMEOUT)
     response.raise_for_status()
+    payload = response.json()
+    if payload.get("error"):
+        raise RuntimeError(payload["error"])
 
-    results = response.json().get("results", [])
     papers: list[dict[str, Any]] = []
+    for item in payload.get("organic_results", []):
+        title = clean_text(item.get("title"))
+        if not title:
+            continue
 
-    for item in results:
-        authors = []
-        for authorship in item.get("authorships", []):
-            name = (authorship.get("author") or {}).get("display_name")
-            if name:
-                authors.append(name)
+        publication_info = item.get("publication_info") or {}
+        authors: list[str] = []
+        for author in publication_info.get("authors", []) or []:
+            if isinstance(author, dict) and author.get("name"):
+                authors.append(clean_text(author["name"]))
 
-        primary = item.get("primary_location") or {}
-        paper_url = primary.get("landing_page_url")
-        if not paper_url:
-            doi = item.get("doi")
-            if doi:
-                paper_url = doi
-        if not paper_url:
-            paper_url = item.get("id")
+        if not authors:
+            summary = clean_text(publication_info.get("summary"))
+            if summary:
+                # Scholar commonly presents "A. Author, B. Author - Venue - year".
+                author_part = summary.split(" - ", 1)[0]
+                authors = [x.strip() for x in author_part.split(",") if x.strip()]
 
-        abstract = reconstruct_abstract(item.get("abstract_inverted_index"))
+        paper_url = item.get("link")
+        snippet = clean_text(item.get("snippet"))
+        year = None
+        summary = clean_text(publication_info.get("summary"))
+        years = re.findall(r"\b(?:19|20)\d{2}\b", summary)
+        if years:
+            year = years[-1]
 
-        open_access = item.get("open_access") or {}
-        if not paper_url:
-            paper_url = open_access.get("oa_url")
+        # Google Scholar gives publication year reliably in many cases, but not
+        # a precise publication date for all records. Keep the year explicit.
+        date = f"{year}" if year else RUN_AT.date().isoformat()
+
+        resources = item.get("resources") or []
+        cited_by = (item.get("inline_links") or {}).get("cited_by") or {}
+        versions = (item.get("inline_links") or {}).get("versions") or {}
 
         papers.append({
-            "title": clean_text(item.get("title")),
+            "title": title,
             "authors": authors,
-            "date": item.get("publication_date"),
+            "date": date,
+            "year": year,
             "paper_url": paper_url,
-            "pdf_url": (primary.get("pdf_url") if primary else None),
-            "code_url": None,
-            "abstract": abstract,
-            "source": "OpenAlex",
-            "arxiv_id": None,
-            "doi": item.get("doi"),
-            "openalex_id": item.get("id"),
-            "cited_by_count": item.get("cited_by_count", 0),
+            "pdf_url": None,
+            "code_url": github_from_resources(resources),
+            "abstract": snippet,
+            "source": "Google Scholar",
+            "scholar_result_id": item.get("result_id"),
+            "scholar_position": item.get("position"),
+            "scholar_cited_by": cited_by.get("total") or cited_by.get("value"),
+            "scholar_versions": versions.get("total") or versions.get("value"),
+            "publication": summary,
         })
 
-    time.sleep(OPENALEX_DELAY)
     return papers
 
 
-# -----------------------------------------------------------------------------
-# Collection + deduplication
-# -----------------------------------------------------------------------------
+def merge_papers(old: dict[str, Any] | None, new: dict[str, Any]) -> dict[str, Any]:
+    if not old:
+        result = dict(new)
+        result["sources"] = sorted(set(new.get("sources", [new.get("source", "")])) - {""})
+        return result
+
+    merged = dict(old)
+    old_source = old.get("source")
+    new_source = new.get("source")
+
+    # arXiv is preferred as the primary link/date when the same work is found
+    # by both sources. Scholar remains useful for citation/versions metadata.
+    if new_source == "arXiv":
+        for key in ["paper_url", "pdf_url", "arxiv_id", "primary_category", "categories", "comment", "journal_ref"]:
+            if new.get(key):
+                merged[key] = new[key]
+        merged["date"] = new.get("date") or merged.get("date")
+        merged["source"] = "arXiv"
+    elif old_source != "arXiv":
+        for key in ["paper_url", "scholar_result_id", "scholar_position", "publication", "year"]:
+            if new.get(key) and not merged.get(key):
+                merged[key] = new[key]
+
+    if len(new.get("abstract", "")) > len(old.get("abstract", "")):
+        merged["abstract"] = new["abstract"]
+    if not merged.get("code_url") and new.get("code_url"):
+        merged["code_url"] = new["code_url"]
+
+    for key in ["doi", "arxiv_id", "scholar_result_id"]:
+        if new.get(key):
+            merged[key] = merged.get(key) or new[key]
+
+    merged["sources"] = sorted(
+        (set(old.get("sources", [old_source] if old_source else []))
+         | set(new.get("sources", [new_source] if new_source else []))) - {""}
+    )
+    merged["topics"] = sorted(set(old.get("topics", [])) | set(new.get("topics", [])))
+    merged["matched_queries"] = sorted(set(old.get("matched_queries", [])) | set(new.get("matched_queries", [])))
+    merged["signals"] = list(dict.fromkeys(old.get("signals", []) + new.get("signals", [])))[:8]
+    for key in ["scholar_cited_by", "scholar_versions"]:
+        try:
+            merged[key] = max(int(old.get(key) or 0), int(new.get(key) or 0)) or None
+        except (TypeError, ValueError):
+            pass
+    merged["relevance_score"] = max(old.get("relevance_score", 0), new.get("relevance_score", 0))
+    return merged
+
+
+def score_relevance(paper: dict[str, Any], topic: dict[str, Any]) -> tuple[int, list[str]]:
+    title = normalize_text(paper.get("title", ""))
+    abstract = normalize_text(paper.get("abstract", ""))
+    combined = f"{title} {abstract}"
+
+    for bad in topic["exclude"]:
+        bad_n = normalize_text(bad)
+        if bad_n and bad_n in title:
+            return -999, [f"excluded:{bad_n}"]
+
+    title_is_image = any(x in title for x in ["image", "images", "visual"])
+    compression_title = any(x in title for x in ["compression", "compress", "coding", "codec", "bitrate", "bpp"])
+    image_context = any(x in combined for x in ["image compression", "image coding", "image codec", "image compression"])
+    if not title_is_image and not image_context:
+        return -100, ["no-image-scope"]
+    if not compression_title and not image_context:
+        return -100, ["no-compression-scope"]
+
+    score = 0
+    reasons: list[str] = []
+    positive_hits = 0
+    for term in topic["positive"]:
+        term_n = normalize_text(term)
+        if term_n and term_n in combined:
+            score += 4 if term_n in title else 1
+            positive_hits += 1
+
+    strong_phrases = [
+        "image compression", "image coding", "image codec", "learned image compression",
+        "neural image compression", "generative image compression", "diffusion image compression",
+        "vector quantized image compression", "residual vector quantization", "extreme image compression",
+        "low bitrate image compression", "perceptual image compression", "semantic image compression",
+    ]
+    for phrase in strong_phrases:
+        if phrase in title:
+            score += 8
+            reasons.append(phrase)
+        elif phrase in abstract:
+            score += 3
+            reasons.append(phrase)
+
+    gate = topic["gate"]
+    if gate == "learned":
+        if not any(x in combined for x in ["learned", "neural", "deep learning", "transformer", "variational", "vae", "latent", "autoencoder", "hyperprior", "entropy model", "context model", "rate-distortion", "quantization"]):
+            return -100, ["learned-gate-failed"]
+    elif gate == "generative":
+        if not any(x in combined for x in ["generative", "diffusion", "semantic", "gan", "score model"]):
+            return -100, ["generative-gate-failed"]
+    elif gate == "extreme":
+        if not any(x in combined for x in ["extreme", "ultra low bitrate", "very low bitrate", "low bitrate", "low rate", "perceptual", "bpp", "bits per pixel"]):
+            return -100, ["extreme-gate-failed"]
+    elif gate == "vq":
+        if not any(x in combined for x in ["vector quantization", "vector-quantized", "vector quantized", "residual vector quantization", "rvq", "vq-vae", "codebook", "quantizer"]):
+            return -100, ["vq-gate-failed"]
+
+    if any(x in title for x in ["video", "speech", "audio", "point cloud", "mesh", "3d gaussian", "gaussian splatting"]) and not title_is_image:
+        score -= 15
+
+    if "rate-distortion" in combined or "rate distortion" in combined:
+        score += 3
+        reasons.append("rate-distortion")
+    if any(x in combined for x in ["bpp", "bits per pixel", "bit/pixel", "bits-per-pixel"]):
+        score += 3
+        reasons.append("bpp")
+    if any(x in combined for x in ["psnr", "ms-ssim", "lpips", "dists"]):
+        score += 2
+        reasons.append("rd-metrics")
+
+    score += min(positive_hits, 5)
+    return score, sorted(set(reasons))
+
+
+def extract_signals(paper: dict[str, Any]) -> list[str]:
+    text = normalize_text(paper.get("title", "") + " " + paper.get("abstract", ""))
+    signals: list[str] = []
+
+    patterns = [
+        (r"(?:^|\s)(\d+(?:\.\d+)?)\s*(?:bpp|bits per pixel)(?:\s|$)", "BPP"),
+        (r"(?:psnr)\s*(?:of|=|:)?\s*(\d+(?:\.\d+)?)\s*d?b?", "PSNR"),
+        (r"(?:ms-ssim)\s*(?:of|=|:)?\s*(0?\.\d+|\d+(?:\.\d+)?)", "MS-SSIM"),
+        (r"(?:lpips)\s*(?:of|=|:)?\s*(0?\.\d+|\d+(?:\.\d+)?)", "LPIPS"),
+        (r"(?:dists)\s*(?:of|=|:) ?\s*(0?\.\d+|\d+(?:\.\d+)?)", "DISTS"),
+    ]
+    for pattern, label in patterns:
+        match = re.search(pattern, text)
+        if match:
+            signals.append(f"{label}={match.group(1)}")
+
+    method_groups = [
+        ("Diffusion", ["diffusion", "latent diffusion", "score model"]),
+        ("Generative", ["generative image compression", "generative compression", "generative model"]),
+        ("VQ/RVQ", ["vector quantization", "vector-quantized", "residual vector quantization", "rvq", "vq-vae"]),
+        ("Hyperprior", ["hyperprior"]),
+        ("Entropy model", ["entropy model", "context model", "autoregressive"]),
+        ("Transformer", ["transformer", "self-attention", "attention"]),
+        ("Semantic", ["semantic image compression", "semantic compression", "semantic coding"]),
+        ("Perceptual", ["perceptual image compression", "perceptual quality", "perceptual loss"]),
+        ("Low bitrate", ["low bitrate", "ultra low bitrate", "very low bitrate", "low-rate"]),
+    ]
+    for label, terms in method_groups:
+        if any(t in text for t in terms):
+            signals.append(label)
+
+    datasets = ["kodak", "clic", "tecnick", "imagenet", "div2k", "flickr2k", "ffhq", "mscoco"]
+    found = [d.upper() if d != "mscoco" else "MS COCO" for d in datasets if d in text]
+    if found:
+        signals.append("Data=" + ", ".join(found[:3]))
+
+    return list(dict.fromkeys(signals))[:8]
 
 
 def collect() -> tuple[dict[str, list[dict[str, Any]]], dict[str, dict[str, Any]]]:
-    history: dict[str, dict[str, Any]] = load_json(HISTORY_FILE, {})
     by_topic: dict[str, list[dict[str, Any]]] = {}
     current_run: dict[str, dict[str, Any]] = {}
 
     for topic_name, topic in TOPICS.items():
-        candidates: dict[str, dict[str, Any]] = {}
         print(f"\n=== {topic_name} ===")
+        candidates: dict[str, dict[str, Any]] = {}
 
-        for query in topic["queries"]:
-            print(f"Searching arXiv: {query}")
+        for query in topic["arxiv_queries"]:
+            print(f"arXiv: {query}")
             try:
-                source_papers = search_arxiv(query, PER_QUERY)
+                papers = search_arxiv(query)
             except Exception as exc:
-                print(f"  arXiv failed: {exc}")
-                source_papers = []
-
-            for paper in source_papers:
-                score = score_relevance(paper, topic)
-                if score < 5:
+                print(f"  failed: {exc}")
+                papers = []
+            for paper in papers:
+                score, _ = score_relevance(paper, topic)
+                if score < 11:
                     continue
-                pid = paper_id(paper)
-                paper["matched_queries"] = [query]
                 paper["topics"] = [topic_name]
-                paper["relevance_score"] = score
-                candidates[pid] = merge_paper(candidates.get(pid), paper)
-
-        for query in topic["queries"]:
-            print(f"Searching OpenAlex: {query}")
-            try:
-                source_papers = search_openalex(query, PER_QUERY)
-            except Exception as exc:
-                print(f"  OpenAlex failed: {exc}")
-                source_papers = []
-
-            for paper in source_papers:
-                score = score_relevance(paper, topic)
-                if score < 5:
-                    continue
-                pid = paper_id(paper)
                 paper["matched_queries"] = [query]
-                paper["topics"] = [topic_name]
                 paper["relevance_score"] = score
-                candidates[pid] = merge_paper(candidates.get(pid), paper)
+                paper["signals"] = extract_signals(paper)
+                pid = stable_id(paper)
+                candidates[pid] = merge_papers(candidates.get(pid), paper)
+
+        print(f"Google Scholar: {topic['scholar_query']}")
+        try:
+            scholar_papers = search_google_scholar(topic["scholar_query"])
+        except Exception as exc:
+            print(f"  failed: {exc}")
+            scholar_papers = []
+        for paper in scholar_papers:
+            score, _ = score_relevance(paper, topic)
+            if score < 11:
+                continue
+            paper["topics"] = [topic_name]
+            paper["matched_queries"] = [topic["scholar_query"]]
+            paper["relevance_score"] = score
+            paper["signals"] = extract_signals(paper)
+            pid = stable_id(paper)
+            candidates[pid] = merge_papers(candidates.get(pid), paper)
 
         papers = list(candidates.values())
-        papers.sort(
-            key=lambda p: (
-                p.get("date") or "0000-00-00",
-                p.get("relevance_score", 0),
-            ),
-            reverse=True,
-        )
-        papers = papers[:PER_TOPIC]
-        by_topic[topic_name] = papers
+        papers.sort(key=lambda p: (str(p.get("date") or "0000"), p.get("relevance_score", 0)), reverse=True)
+        by_topic[topic_name] = papers[:PER_TOPIC]
 
-        for paper in papers:
-            pid = paper_id(paper)
-            current_run[pid] = merge_paper(current_run.get(pid), paper)
+        for paper in by_topic[topic_name]:
+            pid = stable_id(paper)
+            current_run[pid] = merge_papers(current_run.get(pid), paper)
 
     return by_topic, current_run
 
 
-# -----------------------------------------------------------------------------
-# History
-# -----------------------------------------------------------------------------
-
-
-def update_history(current_run: dict[str, dict[str, Any]]) -> tuple[dict[str, dict[str, Any]], set[str]]:
+def update_history(current_run: dict[str, dict[str, Any]]) -> set[str]:
     history: dict[str, dict[str, Any]] = load_json(HISTORY_FILE, {})
     previously_seen = set(history.keys())
-
     for pid, paper in current_run.items():
-        history[pid] = merge_paper(history.get(pid), paper)
-        history[pid]["last_seen"] = RUN_AT.date().isoformat()
+        history[pid] = merge_papers(history.get(pid), paper)
         history[pid]["first_seen"] = history[pid].get("first_seen", RUN_AT.date().isoformat())
-
+        history[pid]["last_seen"] = RUN_AT.date().isoformat()
     save_json(HISTORY_FILE, history)
-    return history, previously_seen
-
-
-# -----------------------------------------------------------------------------
-# Markdown generation
-# -----------------------------------------------------------------------------
+    return previously_seen
 
 
 def md_escape(text: str) -> str:
     return clean_text(text).replace("|", "\\|")
 
 
-def format_paper_row(paper: dict[str, Any], is_new: bool = False) -> str:
+def format_row(paper: dict[str, Any], is_new: bool = False) -> str:
     title = md_escape(paper.get("title", "Untitled"))
-    title = f"**NEW** {title}" if is_new else title
-
-    authors = md_escape(compact_authors(paper.get("authors", [])))
-    date = paper.get("date") or "-"
-    source = paper.get("source") or "-"
-
+    if is_new:
+        title = "**NEW** " + title
+    signals = ", ".join(paper.get("signals", [])[:6]) or "-"
     paper_url = paper.get("paper_url") or paper.get("pdf_url")
     paper_cell = f"[Paper]({paper_url})" if paper_url else "-"
+    code = paper.get("code_url")
+    code_cell = f"[GitHub]({code})" if code else "-"
+    cites = paper.get("scholar_cited_by")
+    citation_cell = str(cites) if cites is not None else "-"
+    sources = ", ".join(paper.get("sources", [paper.get("source", "-")])) or "-"
+    return (
+        f"| {paper.get('date', '-')} | {title} | {md_escape(compact_authors(paper.get('authors', [])))} "
+        f"| {md_escape(signals)} | {paper_cell} | {code_cell} | {citation_cell} | {sources} |"
+    )
 
-    code_url = paper.get("code_url")
-    code_cell = f"[GitHub]({code_url})" if code_url else "-"
 
-    return f"| {date} | {title} | {authors} | {paper_cell} | {code_cell} | {source} |\n"
-
-
-def generate_readme(by_topic: dict[str, list[dict[str, Any]]], current_run: dict[str, dict[str, Any]], previously_seen: set[str]) -> None:
+def generate_readme(
+    by_topic: dict[str, list[dict[str, Any]]],
+    current_run: dict[str, dict[str, Any]],
+    previously_seen: set[str],
+) -> None:
+    new_pids = set(current_run) - previously_seen
     new_by_topic: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for topic_name, papers in by_topic.items():
         for paper in papers:
-            if paper_id(paper) not in previously_seen:
+            if stable_id(paper) in new_pids:
                 new_by_topic[topic_name].append(paper)
-
-    total_new = sum(len(v) for v in new_by_topic.values())
-    total_current = len(current_run)
 
     lines: list[str] = [
         "# Image Compression Paper Daily",
         "",
-        "> Automatically updated from arXiv and OpenAlex.",
-        "> Focus: learned image compression, generative compression, extreme/low-bitrate compression, and vector quantization.",
+        "> High-precision daily reading list for learned, generative, low-bitrate image compression and vector quantization.",
+        "> Sources: arXiv + Google Scholar (via SerpApi). OpenAlex is not used.",
         "",
         f"**Last updated:** {RUN_AT.strftime('%Y-%m-%d %H:%M %Z')}",
         "",
-        f"**Papers collected this run:** {total_current}  |  **New since previous run:** {total_new}",
+        f"**Unique papers this run:** {len(current_run)}  |  **New papers:** {len(new_pids)}",
+        "",
+        "## Collection policy",
+        "",
+        "- Google Scholar is used for broad scholarly discovery; arXiv is used for recent preprints and canonical arXiv links.",
+        "- Candidates must show explicit image-compression/image-coding evidence in title or abstract/snippet.",
+        "- Strong exclusions remove video, audio, speech, text, point-cloud, mesh, 3D Gaussian and generic model/data compression results.",
+        "- Each paper is deduplicated globally by normalized title, so one paper is not counted four times merely because it matches multiple topics or sources.",
+        "- Signals highlight BPP, PSNR, MS-SSIM, LPIPS, VQ/RVQ, diffusion, hyperprior, entropy models, transformers and common datasets when present in available text.",
         "",
         "## Topics",
         "",
     ]
-
     for topic_name in TOPICS:
-        anchor = topic_name.lower().replace(" ", "-")
-        lines.append(f"- [{topic_name}](#{anchor})")
+        lines.append(f"- [{topic_name}](#{topic_name.lower().replace(' ', '-')})")
 
     lines += ["", "## New papers", ""]
-
-    if total_new == 0:
-        lines.append("No previously unseen papers were detected in the latest run.")
-        lines.append("")
+    if not new_pids:
+        lines += ["No previously unseen papers were detected.", ""]
     else:
         for topic_name in TOPICS:
             papers = new_by_topic.get(topic_name, [])
             if not papers:
                 continue
-            lines += [f"### {topic_name}", "", "| Date | Title | Authors | Paper | Code | Source |", "|---|---|---|---|---|---|"]
+            lines += [
+                f"### {topic_name}",
+                "",
+                "| Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |",
+                "|---|---|---|---|---|---|---|---|",
+            ]
             for paper in papers[:PER_TOPIC]:
-                lines.append(format_paper_row(paper, is_new=True).rstrip())
+                lines.append(format_row(paper, is_new=True))
             lines.append("")
 
     lines += ["## Latest papers by topic", ""]
-
     for topic_name in TOPICS:
+        lines += [
+            f"## {topic_name}",
+            "",
+            "| Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |",
+            "|---|---|---|---|---|---|---|---|",
+        ]
         papers = by_topic.get(topic_name, [])
-        anchor = topic_name.lower().replace(" ", "-")
-        lines += [f"## {topic_name}", "", "| Date | Title | Authors | Paper | Code | Source |", "|---|---|---|---|---|---|"]
         if not papers:
-            lines.append("| - | No matching papers found | - | - | - | - |")
+            lines.append("| - | No high-confidence matches | - | - | - | - | - | - |")
         else:
             for paper in papers:
-                lines.append(format_paper_row(paper).rstrip())
+                lines.append(format_row(paper))
         lines.append("")
 
     lines += [
         "## Notes",
         "",
-        "- arXiv is queried through its official API rather than scraping the HTML search page. The API supports structured queries and date sorting. See the [arXiv API manual](https://info.arxiv.org/help/api/user-manual.html).",
-        "- OpenAlex is used as a second index to improve recall beyond arXiv-only searches.",
-        "- `history.json` stores papers already observed so that later runs can mark newly discovered items.",
-        "- Search vocabulary is intentionally broad; the script applies a deterministic title/abstract relevance filter before publishing results.",
+        "Google Scholar does not expose a uniform exact publication date for every result. For Scholar-only records, the table therefore uses the publication year when available. arXiv records retain their submission date.",
+        "",
+        "Google Scholar API via SerpApi: https://serpapi.com/google-scholar-api",
+        "arXiv API: https://info.arxiv.org/help/api/user-manual.html",
         "",
     ]
-
     README_FILE.write_text("\n".join(lines), encoding="utf-8")
 
 
 def save_current_run(by_topic: dict[str, list[dict[str, Any]]]) -> None:
-    payload = {
+    save_json(PAPERS_FILE, {
         "generated_at": RUN_AT.isoformat(),
-        "timezone": str(TIMEZONE),
         "lookback_days": LOOKBACK_DAYS,
         "topics": by_topic,
-    }
-    save_json(PAPERS_FILE, payload)
-
-
-# -----------------------------------------------------------------------------
-# Main
-# -----------------------------------------------------------------------------
+    })
 
 
 def main() -> None:
-    print(f"Running paper collector at {RUN_AT.isoformat()}")
-    print(f"Lookback={LOOKBACK_DAYS}d, per_query={PER_QUERY}, per_topic={PER_TOPIC}")
+    if not SERPAPI_API_KEY:
+        raise SystemExit(
+            "SERPAPI_API_KEY is missing. Create a SerpApi key and store it in GitHub "
+            "Settings -> Secrets and variables -> Actions -> New repository secret."
+        )
 
+    print(f"Run time: {RUN_AT.isoformat()}")
+    print(f"lookback={LOOKBACK_DAYS}d, scholar_num={SCHOLAR_NUM}, per_topic={PER_TOPIC}")
     by_topic, current_run = collect()
-    _, previously_seen = update_history(current_run)
+    previously_seen = update_history(current_run)
     save_current_run(by_topic)
     generate_readme(by_topic, current_run, previously_seen)
-
-    print(f"\nFinished: {len(current_run)} unique papers in current run.")
+    print(f"Finished: {len(current_run)} unique high-confidence papers.")
+    print(f"New papers: {len(set(current_run) - previously_seen)}")
 
 
 if __name__ == "__main__":
