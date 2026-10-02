@@ -288,13 +288,13 @@
       "A Usman",
       "NA Bhatti"
     ],
-    "date": "2026",
+    "date": "2026-09-24",
     "year": "2026",
-    "paper_url": "https://arxiv.org/abs/2609.29727",
-    "pdf_url": null,
+    "paper_url": "http://arxiv.org/abs/2609.29727v1",
+    "pdf_url": "https://arxiv.org/pdf/2609.29727v1",
     "code_url": null,
-    "abstract": "7 days ago - Learned image compression (LIC) is hard to deploy on severely resource-constrained FPGAs, since how fast it actually runs depends not just on arithmetic count, but also …",
-    "source": "Google Scholar",
+    "abstract": "Learned image compression (LIC) is hard to deploy on severely resource-constrained FPGAs, since how fast it actually runs depends not just on arithmetic count, but also on memory traffic, imbalance between different operations, and how the hardware batches its work. We present VQ-LIC, an asymmetric edge-cloud codec in which a compact INT8 depthwise (DW)-pointwise (PW) analysis transform and multi-codebook vector quantization (VQ) run at the edge on a reusable DW/PW engine pair, while reconstruction is handled by a larger cloud decoder. Since VQ codeword matching is expressible as a dot product, it is mapped directly onto the same PW engine, removing the need for a separate VQ compute array, to our knowledge a first for FPGA LIC. A novel latency model, derived from deterministic RTL cycle counts of an FPGA's read, DW, PW, and write costs, predicts an analysis transform's per-block latency; since VQ shares the same PW datapath, the model applies to VQ as well. Validated directly against silicon, the model predicts deployed analysis and VQ latency within 0.26\\% and 0.05\\%, and guides the selection of a three-block $16$-$48$-$64$ transform. Post-training codebook reduction then cuts VQ arithmetic and codebook storage by $4\\times$ and shrinks the fixed-width latent representation. On a 220-DSP Zynq-7020, VQ-LIC's mid-rate preset reaches 0.1398 bits per pixel at 28.69 dB PSNR and 13.06 dB MS-SSIM on CLIC~2017, outperforming a similarly sized neural encoder and reaching a rate-distortion range comparable to a codec three orders of magnitude larger. The complete 0.1945-kMAC/pixel analysis-VQ pipeline runs at 47.98 frames per second and 42.84 mJ per frame on silicon, using an order of magnitude fewer DSPs than comparable FPGA LIC accelerators while achieving lower bitrate, higher throughput, and lower energy per frame at a modest PSNR tradeoff.",
+    "source": "arXiv",
     "scholar_result_id": "c7Y2Zs44l4oJ",
     "scholar_position": 2,
     "scholar_cited_by": null,
@@ -306,17 +306,28 @@
     ],
     "matched_queries": [
       "\"learned image compression\" OR \"neural image compression\" OR \"learned image coding\" OR \"end-to-end image compression\"",
-      "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")"
+      "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")",
+      "(ti:\"learned image compression\" OR abs:\"learned image compression\")",
+      "(ti:\"vector quantized\" OR abs:\"vector quantized\" OR ti:\"vector-quantization\" OR abs:\"vector-quantization\") AND (ti:\"image compression\" OR abs:\"image compression\")"
     ],
-    "relevance_score": 30,
+    "relevance_score": 40,
     "signals": [
-      "VQ/RVQ"
+      "VQ/RVQ",
+      "BPP=0.1398",
+      "Data=CLIC"
     ],
     "sources": [
-      "Google Scholar"
+      "Google Scholar",
+      "arXiv"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-02"
+    "last_seen": "2026-10-02",
+    "arxiv_id": "2609.29727",
+    "primary_category": "cs.AR",
+    "categories": [
+      "cs.AR",
+      "eess.IV"
+    ]
   },
   "title:79134c5b19fc465fddea006a45a9171584b82e90": {
     "title": "LIC_MCM: Learned Image Compression with Mamba-CNN Mixture Architecture for Remote Sensing Images",
@@ -943,33 +954,44 @@
       "C Jiao",
       "F Li"
     ],
-    "date": "2026",
+    "date": "2026-09-03",
     "year": "2026",
-    "paper_url": "https://arxiv.org/abs/2609.03641",
-    "pdf_url": null,
+    "paper_url": "http://arxiv.org/abs/2609.03641v1",
+    "pdf_url": "https://arxiv.org/pdf/2609.03641v1",
     "code_url": null,
-    "abstract": "28 days ago - … Abstract:Vector-quantization based image compression has achieved strong rate--… tree-structured vector quantization framework for learned image compression. Tree-VQ …",
-    "source": "Google Scholar",
+    "abstract": "Vector-quantization based image compression has achieved strong rate--distortion performance, yet most of them still produce a separate compressed representation for each target bitrate. Such variable-rate behavior allows one model to operate at multiple rates, but it does not necessarily provide a progressive bitstream whose prefixes are themselves decodable and can be refined by appending additional bits. We propose \\textbf{Tree-VQ}, a progressive tree-structured vector quantization framework for learned image compression. Tree-VQ organizes discrete codewords as a hierarchical binary tree and represents each latent token by a routed root-to-leaf path. Crucially, every prefix of this path corresponds to a valid quantized representation, so shallow internal nodes serve as coarse reconstruction codes and deeper nodes provide successive refinements. This allows a compressed image to be decoded from an early prefix and progressively improved as more branch symbols are received, rather than being re-encoded for different target rates. To make this structure practical for compression, we introduce a prefix-compatible tree entropy model that codes progressive continuation decisions and routed branch refinements using only causally available decoded contexts. We further use rate-aware refinement scheduling to decide which spatial blocks should receive additional tree bits under a given prefix budget, and hierarchical prefix supervision to ensure that internal nodes are directly decodable at low rates. Experiments show that Tree-VQ achieves a superior performance--efficiency trade-off, delivering the best perceptual compression results with much fewer parameters and lower latency than competing methods.",
+    "source": "arXiv",
     "scholar_result_id": "i3oYov2IlwAJ",
     "scholar_position": 5,
     "scholar_cited_by": null,
     "scholar_versions": 2,
     "publication": "X Wang, T Xu, Q Luo, M Ma, C Jiao, F Li… - arXiv preprint arXiv …, 2026 - arxiv.org",
     "topics": [
+      "Learned Image Compression",
       "Vector Quantization"
     ],
     "matched_queries": [
-      "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")"
+      "\"learned image compression\" OR \"neural image compression\" OR \"learned image coding\" OR \"end-to-end image compression\"",
+      "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")",
+      "(ti:\"learned image compression\" OR abs:\"learned image compression\")",
+      "(ti:\"vector quantized\" OR abs:\"vector quantized\" OR ti:\"vector-quantization\" OR abs:\"vector-quantization\") AND (ti:\"image compression\" OR abs:\"image compression\")"
     ],
     "relevance_score": 26,
     "signals": [
-      "VQ/RVQ"
+      "VQ/RVQ",
+      "Entropy model"
     ],
     "sources": [
-      "Google Scholar"
+      "Google Scholar",
+      "arXiv"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-02"
+    "last_seen": "2026-10-02",
+    "arxiv_id": "2609.03641",
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ]
   },
   "title:6416405b86a24b2c4ff1b2fa94e0eb1fc6afe390": {
     "title": "Efficient Learned Image Compression without Entropy Coding",
@@ -1250,6 +1272,181 @@
     ],
     "sources": [
       "Google Scholar"
+    ],
+    "first_seen": "2026-10-02",
+    "last_seen": "2026-10-02"
+  },
+  "title:f81668efef3dde0c2a262bd23f025edcfa8dbbf2": {
+    "title": "PULSE: Unlocking Practical Image Compression on Single-Thread CPU",
+    "authors": [
+      "Zhaoyang Jia",
+      "Tianyu Zhang",
+      "Zihan Zheng",
+      "Wenxuan Xie",
+      "Jiahao Li",
+      "Bin Li",
+      "Houqiang Li",
+      "Yan Lu"
+    ],
+    "date": "2026-09-16",
+    "paper_url": "http://arxiv.org/abs/2609.18602v1",
+    "pdf_url": "https://arxiv.org/pdf/2609.18602v1",
+    "code_url": null,
+    "abstract": "Despite recent progress in learned image compression, existing methods remain computationally expensive on resource-constrained hardware, particularly CPUs. We introduce PULSE, a practical codec that enables (1) low-latency decoding on diverse hardware platforms with an ultra-low-complexity 5.2 kMAC/pixel neural receiver, and (2) efficient bit-exact entropy coding with an integer linear CDF predictor and a meta prior. To recover compression performance under this tight budget, we introduce an agentic evolution process guided by heuristic probes that iteratively improves the architecture through human-LLM collaboration. PULSE decodes a 1080p image in 126 ms on a single CPU thread while achieving compression performance comparable to HM. After perceptual optimization, PULSE competes with larger perceptual codecs like MS-ILLM. Codes are at https://github.com/microsoft/GenCodec/tree/main/PULSE",
+    "source": "arXiv",
+    "arxiv_id": "2609.18602",
+    "doi": null,
+    "comment": "",
+    "journal_ref": "",
+    "categories": [
+      "cs.CV"
+    ],
+    "primary_category": "cs.CV",
+    "topics": [
+      "Learned Image Compression"
+    ],
+    "matched_queries": [
+      "\"learned image compression\" OR \"neural image compression\" OR \"learned image coding\" OR \"end-to-end image compression\"",
+      "(ti:\"learned image compression\" OR abs:\"learned image compression\")"
+    ],
+    "relevance_score": 18,
+    "signals": [],
+    "sources": [
+      "Google Scholar",
+      "arXiv"
+    ],
+    "scholar_result_id": "pIF-WeYUMtQJ",
+    "scholar_cited_by": null,
+    "scholar_versions": null,
+    "first_seen": "2026-10-02",
+    "last_seen": "2026-10-02"
+  },
+  "title:591701a027b2182cc1f4742015300afdd595cf5f": {
+    "title": "Rethinking Generative Image Compression at Extremely Low Bitrates",
+    "authors": [
+      "Tianyu Zhang",
+      "Zhaoyang Jia",
+      "Houqiang Li",
+      "Dong Liu"
+    ],
+    "date": "2026-09-30",
+    "paper_url": "http://arxiv.org/abs/2609.39315v1",
+    "pdf_url": "https://arxiv.org/pdf/2609.39315v1",
+    "code_url": null,
+    "abstract": "Generative image compression produces visually plausible reconstructions at low bitrates, yet their behavior as the rate approaches zero remains largely unexplored. When pushed below normal operating rates, representative codecs undergo semantic collapse: rather than gracefully losing source-specific detail, they produce malformed or unrecognizable content. Our analysis identifies two factors. As the bitrate decreases, reconstruction losses increasingly conflict with semantic objectives on gradients and visual results, while pixel-space and reconstruction-oriented VAE diffusion models become less efficient on semantic preservation. Guided by these findings, we introduce RAE-CoD, a compression-oriented diffusion (CoD) built in a representation autoencoder (RAE) space with direct alignment between compressed and source representations, preserving recognizable, naturally structured content for a $256\\times256$ image with as few as 16 bits. We evaluate this framework using five vision foundation models (VFM) and a blinded vision-language model protocol. On MSCOCO-30K, RAE-CoD stands out from all evaluation. At 0.001-0.008 bpp, it reduces relative VFM feature MSE and Fréchet Distance ratio by at least 25.7% and 69.1% over the best competitors. Meanwhile, semantic recognizability and quality of the reconstructions remain nearly constant while source consistency falls smoothly, replacing abrupt semantic collapse with a graceful transition toward unconditional generation. Code will be released at https://github.com/LuizScarlet/RAE-CoD.",
+    "source": "arXiv",
+    "arxiv_id": "2609.39315",
+    "doi": null,
+    "comment": "",
+    "journal_ref": "",
+    "categories": [
+      "cs.CV"
+    ],
+    "primary_category": "cs.CV",
+    "topics": [
+      "Extreme Image Compression",
+      "Generative Image Compression"
+    ],
+    "matched_queries": [
+      "(ti:\"generative image compression\" OR abs:\"generative image compression\")",
+      "(ti:\"low bitrate\" OR abs:\"low bitrate\") AND (ti:\"image compression\" OR abs:\"image compression\")"
+    ],
+    "relevance_score": 24,
+    "signals": [
+      "Diffusion",
+      "Generative",
+      "Low bitrate",
+      "Data=MS COCO"
+    ],
+    "sources": [
+      "arXiv"
+    ],
+    "scholar_cited_by": null,
+    "scholar_versions": null,
+    "first_seen": "2026-10-02",
+    "last_seen": "2026-10-02"
+  },
+  "title:734c6a44b4a2b64ce130717bb62ea186c44a5e23": {
+    "title": "ResARC: Residual-Aware AutoRegressive Coding for Ultra-Low Bitrate Image Compression",
+    "authors": [
+      "Qin Yan",
+      "Ruixiao Dong",
+      "Yutao Xie",
+      "Li Li",
+      "Ying Chen",
+      "Kai Li",
+      "Daowen Li",
+      "Houqiang Li"
+    ],
+    "date": "2026-09-30",
+    "paper_url": "http://arxiv.org/abs/2609.39451v1",
+    "pdf_url": "https://arxiv.org/pdf/2609.39451v1",
+    "code_url": null,
+    "abstract": "Progressive autoregressive image codecs provide an appealing paradigm for generative compression by quantizing continuous latents into discrete tokens, transmitting coarse-to-fine prefix tokens and generating the remaining suffix tokens at the decoder. However, their reconstruction quality is fundamentally limited by two residuals introduced along this pipeline: the quantization residual, arising from information loss during discrete tokenization, and the generation residual, resulting from imperfect autoregressive generation of the suffix tokens. To address these limitations, we introduce ResARC, a residual-aware autoregressive codec that explicitly compensates for both residuals at the decoder. Specifically, we generate the quantization residual with a diffusion transformer conditioned on the autoregressive decoding context, while requiring no additional side information. In parallel, we compute the generation residual at the encoder and employ a learned Generation Residual Codec to efficiently compress and transmit it for decoder-side correction. The recovered residuals are then integrated with the reconstructed latent representation and decoded through an adapted VAE decoder. Extensive experiments demonstrate that ResARC achieves competitive perceptual similarity while substantially improving distributional fidelity over leading generative codecs across the ultra-low bitrate regime. Code and models will be released soon.",
+    "source": "arXiv",
+    "arxiv_id": "2609.39451",
+    "doi": null,
+    "comment": "",
+    "journal_ref": "",
+    "categories": [
+      "cs.CV"
+    ],
+    "primary_category": "cs.CV",
+    "topics": [
+      "Extreme Image Compression"
+    ],
+    "matched_queries": [
+      "(ti:\"low bitrate\" OR abs:\"low bitrate\") AND (ti:\"image compression\" OR abs:\"image compression\")"
+    ],
+    "relevance_score": 24,
+    "signals": [
+      "Diffusion",
+      "Generative",
+      "Entropy model",
+      "Transformer",
+      "Low bitrate"
+    ],
+    "sources": [
+      "arXiv"
+    ],
+    "first_seen": "2026-10-02",
+    "last_seen": "2026-10-02"
+  },
+  "title:692a7414561f7f964a6798e866ae44391a0df55f": {
+    "title": "Rate-Adaptive One-Step Diffusion Compression for AIGC Images",
+    "authors": [
+      "Nitiz Khanal"
+    ],
+    "date": "2026-09-25",
+    "paper_url": "http://arxiv.org/abs/2609.31795v1",
+    "pdf_url": "https://arxiv.org/pdf/2609.31795v1",
+    "code_url": null,
+    "abstract": "We describe our entry to the LoViF 2026 AIGC Image Compression Challenge, a benchmark for ultra-low-bitrate coding of AI-generated images under a strict global rate budget of 0.025 bits per pixel (BPP). Generated imagery poses a distinct challenge for compression: it frequently contains rendered typography, synthetic edges, repeated motifs, UI-like layout, and stylized micro-texture that conventional distortion-oriented codecs erase at this rate, while unconstrained generative decoders can restore plausible-looking detail that no longer matches the source geometry or symbols. We treat this as a rate-perception allocation problem. Our system fine-tunes four rate-specialized checkpoints of the AEIC one-step diffusion codec, generates per-image candidates from all four, including one latent refined through encoder-side test-time optimization (TTO) with periodic entropy-conditioning refresh, entropy-codes every candidate with practical rANS coding, and selects exactly one bitstream per image with an exact multiple-choice knapsack solved over true coded file sizes. A fixed, zero-additional-bit residual restoration network is applied at decode time. Every submitted bitstream is independently decodable by the shipped decoder, which uses no source image or external side information. We report the full pipeline, an ablation history spanning 77 logged experiments, and a set of negative results, including why PSNR could not be pushed to parity with rate-distortion-oriented competitors under this architecture, useful to future participants. This is a challenge report: our entry scored 31.527739 (PSNR 27.02 dB, MS-SSIM 0.9176, LPIPS 0.0778, DISTS 0.0390 at 0.02495 BPP), the second-best DISTS on the leaderboard, ranking 5th on the final test-phase leaderboard announced August 4, 2026.",
+    "source": "arXiv",
+    "arxiv_id": "2609.31795",
+    "doi": null,
+    "comment": "",
+    "journal_ref": "",
+    "categories": [
+      "cs.CV"
+    ],
+    "primary_category": "cs.CV",
+    "topics": [
+      "Extreme Image Compression"
+    ],
+    "matched_queries": [
+      "(ti:\"low bitrate\" OR abs:\"low bitrate\") AND (ti:\"image compression\" OR abs:\"image compression\")"
+    ],
+    "relevance_score": 17,
+    "signals": [
+      "BPP=0.025",
+      "PSNR=27.02",
+      "MS-SSIM=0.9176",
+      "LPIPS=0.0778",
+      "Diffusion"
+    ],
+    "sources": [
+      "arXiv"
     ],
     "first_seen": "2026-10-02",
     "last_seen": "2026-10-02"
