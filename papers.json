@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T21:01:06.043018+09:00",
+  "generated_at": "2026-10-03T14:12:09.999968+09:00",
   "lookback_days": 30,
   "topics": {
     "Learned Image Compression": [
@@ -10,12 +10,12 @@
           "F Pakdaman",
           "M Gabbouj"
         ],
-        "date": "2026-10-02",
+        "date": "2026-10-03",
         "year": null,
         "paper_url": "https://openreview.net/forum?id=w3nmVLqvlc",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "23 days ago - … , an end-to-end learned image compression approach driven by edge-guided Just … it can be applied to enhance any learned image compression baseline. Experiments on …",
+        "abstract": "24 days ago - … , an end-to-end learned image compression approach driven by edge-guided Just … it can be applied to enhance any learned image compression baseline. Experiments on …",
         "source": "Google Scholar",
         "scholar_result_id": "eWhAcvLeB-kJ",
         "scholar_position": 13,
@@ -44,7 +44,7 @@
           "S He",
           "C Zhang"
         ],
-        "date": "2026-10-02",
+        "date": "2026-10-03",
         "year": null,
         "paper_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7370043",
         "pdf_url": null,
@@ -215,7 +215,7 @@
         "paper_url": "https://ideas.repec.org/a/bjf/journl/v11y2026i7p466-480.html",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "34 days ago - … The emphasis is on what steps can be taken towards learned image compression, which is a subject pursued by the Deep Learning (DL) community. …",
+        "abstract": "35 days ago - … The emphasis is on what steps can be taken towards learned image compression, which is a subject pursued by the Deep Learning (DL) community. …",
         "source": "Google Scholar",
         "scholar_result_id": "Q7pdHi96xu8J",
         "scholar_position": 20,
@@ -380,7 +380,7 @@
         "paper_url": "https://www.sciencedirect.com/science/article/pii/S0141938226003653",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "3 days ago - A key limitation of existing learned image compression (LIC) methods is the insufficient utilization of high-level structural priors during bitrate allocation. Without explicit …",
+        "abstract": "4 days ago - A key limitation of existing learned image compression (LIC) methods is the insufficient utilization of high-level structural priors during bitrate allocation. Without explicit …",
         "source": "Google Scholar",
         "scholar_result_id": "cqyDRqL2jwgJ",
         "scholar_position": 1,
@@ -486,10 +486,10 @@
         "paper_url": "https://arxiv.org/abs/2603.02897",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "212 days ago - … : How can we build flexible generative image compression for both bandwidth- and … Progressive Generative Image Compression (ProGIC), an image codec designed for …",
+        "abstract": "213 days ago - … : How can we build flexible generative image compression for both bandwidth- and … Progressive Generative Image Compression (ProGIC), an image codec designed for …",
         "source": "Google Scholar",
         "scholar_result_id": "UKyC12KlRE4J",
-        "scholar_position": 11,
+        "scholar_position": 19,
         "scholar_cited_by": 1,
         "scholar_versions": 2,
         "publication": "H Cao, C Liang, W Guo, Z Qin, J Han - arXiv preprint arXiv:2603.02897, 2026 - arxiv.org",
@@ -520,10 +520,10 @@
         "paper_url": "https://arxiv.org/abs/2606.13366",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "112 days ago - … We propose DCIC (Dual-Constrained Diffusion Image Compression), a framework that integrates a learned image compression codec with a diffusionbased decoder …",
+        "abstract": "113 days ago - … We propose DCIC (Dual-Constrained Diffusion Image Compression), a framework that integrates a learned image compression codec with a diffusionbased decoder …",
         "source": "Google Scholar",
         "scholar_result_id": "mCaJ-_GaEjkJ",
-        "scholar_position": 6,
+        "scholar_position": 7,
         "scholar_cited_by": null,
         "scholar_versions": 2,
         "publication": "S Jiang, J Katto, H Sun - arXiv preprint arXiv:2606.13366, 2026 - arxiv.org",
@@ -558,7 +558,7 @@
         "abstract": "173 days ago - The rapid growth of visual data under stringent storage and bandwidth constraints makes extremely low-bitrate image compression increasingly important. While Vector …",
         "source": "Google Scholar",
         "scholar_result_id": "rgzVaIiR3LEJ",
-        "scholar_position": 8,
+        "scholar_position": 13,
         "scholar_cited_by": 1,
         "scholar_versions": 2,
         "publication": "S Jiang, W Long, M Han, Z Chen, C Zhu… - arXiv preprint arXiv …, 2026 - arxiv.org",
@@ -572,6 +572,39 @@
         "signals": [
           "Generative",
           "VQ/RVQ"
+        ],
+        "sources": [
+          "Google Scholar"
+        ]
+      },
+      {
+        "title": "Adaptive Fused Prior Transfer for Controllable Generative Image Compression",
+        "authors": [
+          "Y Pei",
+          "Y Liu",
+          "N Ling"
+        ],
+        "date": "2026",
+        "year": "2026",
+        "paper_url": "https://arxiv.org/abs/2605.16817",
+        "pdf_url": null,
+        "code_url": null,
+        "abstract": "139 days ago - … and Generative Image Compression Perceptual and generative image compression methods … Early work on generative compression studied distribution-preserving lossy …",
+        "source": "Google Scholar",
+        "scholar_result_id": "OMkQJ-0qGTcJ",
+        "scholar_position": 11,
+        "scholar_cited_by": null,
+        "scholar_versions": null,
+        "publication": "Y Pei, Y Liu, N Ling - arXiv preprint arXiv:2605.16817, 2026 - arxiv.org",
+        "topics": [
+          "Generative Image Compression"
+        ],
+        "matched_queries": [
+          "\"generative image compression\" OR \"diffusion image compression\" OR \"generative image coding\" OR \"generative compression\" image"
+        ],
+        "relevance_score": 23,
+        "signals": [
+          "Generative"
         ],
         "sources": [
           "Google Scholar"
@@ -651,6 +684,45 @@
         ]
       },
       {
+        "title": "CoD-Lite: Real-Time Diffusion-Based Generative Image Compression",
+        "authors": [
+          "Z Jia",
+          "N Xue",
+          "Z Zheng",
+          "J Li",
+          "B Li",
+          "X Zhang",
+          "Z Guo"
+        ],
+        "date": "2026",
+        "year": "2026",
+        "paper_url": "https://arxiv.org/abs/2604.12525",
+        "pdf_url": null,
+        "code_url": null,
+        "abstract": "171 days ago - Recent advanced diffusion methods typically derive strong generative priors by scaling diffusion transformers. However, scaling fails to generalize when adapted for real-…",
+        "source": "Google Scholar",
+        "scholar_result_id": "yZRYQQ_h44MJ",
+        "scholar_position": 12,
+        "scholar_cited_by": 3,
+        "scholar_versions": 3,
+        "publication": "Z Jia, N Xue, Z Zheng, J Li, B Li, X Zhang, Z Guo… - arXiv preprint arXiv …, 2026 - arxiv.org",
+        "topics": [
+          "Generative Image Compression"
+        ],
+        "matched_queries": [
+          "\"generative image compression\" OR \"diffusion image compression\" OR \"generative image coding\" OR \"generative compression\" image"
+        ],
+        "relevance_score": 21,
+        "signals": [
+          "Diffusion",
+          "Generative",
+          "Transformer"
+        ],
+        "sources": [
+          "Google Scholar"
+        ]
+      },
+      {
         "title": "Prompt-Optimization with Contextual Mining for Cross-Modal Image Compression",
         "authors": [
           "S Song",
@@ -666,7 +738,7 @@
         "abstract": "192 days ago - … ) have opened new horizons for perceptual image coding at ultra-low bitrates (below 0.1 bpp) within a generative compression paradigm, but reconstruction fidelity is often …",
         "source": "Google Scholar",
         "scholar_result_id": "xdLfusd4OfQJ",
-        "scholar_position": 9,
+        "scholar_position": 15,
         "scholar_cited_by": null,
         "scholar_versions": null,
         "publication": "S Song, Z Huang, J Gao, C Jia… - 2026 Data Compression …, 2026 - ieeexplore.ieee.org",
@@ -687,41 +759,6 @@
         ]
       },
       {
-        "title": "Diff-ICMH: Harmonizing machine and human vision in image compression with generative prior",
-        "authors": [
-          "R Feng",
-          "Y Qi",
-          "J Liu",
-          "Y Gao",
-          "X Li"
-        ],
-        "date": "2026",
-        "year": "2026",
-        "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/5c33e9aedee21daeda9e03f43ec4865d-Abstract-Conference.html",
-        "pdf_url": null,
-        "code_url": null,
-        "abstract": "338 days ago - … by generative image compression effectively mitigate error accumulation arising from … We realize this by developing a generative compression method leveraging a pre-…",
-        "source": "Google Scholar",
-        "scholar_result_id": "IywSEX47rtwJ",
-        "scholar_position": 13,
-        "scholar_cited_by": 6,
-        "scholar_versions": 5,
-        "publication": "R Feng, Y Qi, J Liu, Y Gao, X Li… - Advances in Neural …, 2026 - proceedings.neurips.cc",
-        "topics": [
-          "Generative Image Compression"
-        ],
-        "matched_queries": [
-          "\"generative image compression\" OR \"diffusion image compression\" OR \"generative image coding\" OR \"generative compression\" image"
-        ],
-        "relevance_score": 15,
-        "signals": [
-          "Generative"
-        ],
-        "sources": [
-          "Google Scholar"
-        ]
-      },
-      {
         "title": "GVCCTurbo: Rate-Compute Quality Scheduling for Codebook Driven Generative Compression",
         "authors": [
           "Z Zeng",
@@ -734,7 +771,7 @@
         "paper_url": "https://arxiv.org/abs/2608.03517",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "58 days ago - … Codebook-driven generative compression uses a pretrained image or video … video and DDCM-style diffusion image compression, preserving zerotraining deployment and …",
+        "abstract": "59 days ago - … Codebook-driven generative compression uses a pretrained image or video … video and DDCM-style diffusion image compression, preserving zerotraining deployment and …",
         "source": "Google Scholar",
         "scholar_result_id": "M0ZBetm2THAJ",
         "scholar_position": 3,
@@ -757,27 +794,60 @@
         ]
       },
       {
-        "title": "Next-frame decoding for ultra-low-bitrate image compression with video diffusion priors",
+        "title": "Uncertainty-Gated Generative Compression for Structure-Preserving Multimedia Retrieval",
         "authors": [
-          "Y Chen",
-          "C Zhou",
-          "J Li",
-          "X Ling",
-          "B He",
-          "J Dai"
+          "Y Ding",
+          "Z Chen",
+          "J Wei"
         ],
         "date": "2026",
         "year": "2026",
-        "paper_url": "https://link.springer.com/chapter/10.1007/978-3-032-37422-6_15",
+        "paper_url": "https://dl.acm.org/doi/abs/10.1145/3805622.3810699",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "199 days ago - We present a novel paradigm for ultra-low-bitrate image compression (ULB-IC) that exploits the “temporal” evolution in generative image compression. Specifically, we …",
+        "abstract": "109 days ago - … Generative image compression can synthesize perceptually plausible details at low bitrates, yet existing methods separate structure-critical from synthesizable information …",
         "source": "Google Scholar",
-        "scholar_result_id": "6eljHFTEH3IJ",
-        "scholar_position": 10,
-        "scholar_cited_by": 4,
-        "scholar_versions": 3,
-        "publication": "Y Chen, C Zhou, J Li, X Ling, B He, J Dai… - … on Computer Vision, 2026 - Springer",
+        "scholar_result_id": "8CpkUOj_uEQJ",
+        "scholar_position": 6,
+        "scholar_cited_by": null,
+        "scholar_versions": null,
+        "publication": "Y Ding, Z Chen, J Wei - … of the 2026 International Conference on …, 2026 - dl.acm.org",
+        "topics": [
+          "Generative Image Compression"
+        ],
+        "matched_queries": [
+          "\"generative image compression\" OR \"diffusion image compression\" OR \"generative image coding\" OR \"generative compression\" image"
+        ],
+        "relevance_score": 13,
+        "signals": [
+          "Generative",
+          "Low bitrate"
+        ],
+        "sources": [
+          "Google Scholar"
+        ]
+      },
+      {
+        "title": "Region-Adaptive Generative Compression with Spatially Varying Diffusion Models",
+        "authors": [
+          "L Relic",
+          "R Azevedo",
+          "Y Zhang",
+          "S Mandt",
+          "M Gross"
+        ],
+        "date": "2026",
+        "year": "2026",
+        "paper_url": "https://arxiv.org/abs/2604.01122",
+        "pdf_url": null,
+        "code_url": null,
+        "abstract": "184 days ago - … region-aware generative image compression framework. Based on the region of interest, our method adaptively allocates bits for different areas of the image. Regions of …",
+        "source": "Google Scholar",
+        "scholar_result_id": "X2O4lWp6JFcJ",
+        "scholar_position": 14,
+        "scholar_cited_by": null,
+        "scholar_versions": 2,
+        "publication": "L Relic, R Azevedo, Y Zhang, S Mandt, M Gross… - arXiv preprint arXiv …, 2026 - arxiv.org",
         "topics": [
           "Generative Image Compression"
         ],
@@ -792,43 +862,6 @@
         "sources": [
           "Google Scholar"
         ]
-      },
-      {
-        "title": "Beyond Hallucinations: A Multimodal-Guided Task-Aware Generative Image Compression for Ultra-Low Bitrate",
-        "authors": [
-          "K Wang",
-          "L He",
-          "H Fu",
-          "H Bi",
-          "F Li"
-        ],
-        "date": "2025",
-        "year": "2025",
-        "paper_url": "https://www.sciencestack.ai/paper/2512.06344",
-        "pdf_url": null,
-        "code_url": null,
-        "abstract": "300 days ago - Generative image compression has recently shown impressive perceptual quality, but often suffers from semantic deviations caused by generative hallucinations at ultra-…",
-        "source": "Google Scholar",
-        "scholar_result_id": "qd_a1Cf92IcJ",
-        "scholar_position": 12,
-        "scholar_cited_by": 1,
-        "scholar_versions": 2,
-        "publication": "K Wang, L He, H Fu, H Bi, F Li - arXiv preprint arXiv:2512.06344, 2025 - sciencestack.ai",
-        "topics": [
-          "Generative Image Compression"
-        ],
-        "matched_queries": [
-          "\"generative image compression\" OR \"diffusion image compression\" OR \"generative image coding\" OR \"generative compression\" image"
-        ],
-        "relevance_score": 21,
-        "signals": [
-          "Generative",
-          "Perceptual",
-          "Low bitrate"
-        ],
-        "sources": [
-          "Google Scholar"
-        ]
       }
     ],
     "Extreme Image Compression": [
@@ -839,12 +872,12 @@
           "H Na",
           "P Zhao"
         ],
-        "date": "2026-10-02",
+        "date": "2026-10-03",
         "year": null,
         "paper_url": "https://openreview.net/pdf?id=jb43xbjJAF",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "23 days ago - … We presented the XIAOQING system for the LoViF 2026 ultra-low bitrate image compression challenge. The final submission uses a practical entropy-coded AEIC-ME …",
+        "abstract": "24 days ago - … We presented the XIAOQING system for the LoViF 2026 ultra-low bitrate image compression challenge. The final submission uses a practical entropy-coded AEIC-ME …",
         "source": "Google Scholar",
         "scholar_result_id": "M5IiHzPrCpcJ",
         "scholar_position": 3,
@@ -871,12 +904,12 @@
           "CY Chen",
           "R Sivakumar"
         ],
-        "date": "2026-10-02",
+        "date": "2026-10-03",
         "year": null,
         "paper_url": "https://openreview.net/forum?id=U9w7HZlK0i",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "23 days ago - … ultra-low-bitrate regime all three gaps are proportionally large: with only ∼104 bits per image… LoViF 2026 Challenge on Ultra-Low Bitrate Image Compression, which fixes …",
+        "abstract": "24 days ago - … ultra-low-bitrate regime all three gaps are proportionally large: with only ∼104 bits per image… LoViF 2026 Challenge on Ultra-Low Bitrate Image Compression, which fixes …",
         "source": "Google Scholar",
         "scholar_result_id": "ew-3e9h3bicJ",
         "scholar_position": 4,
@@ -1030,7 +1063,7 @@
         "paper_url": "https://ieeexplore.ieee.org/abstract/document/11475314/",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "197 days ago - … Ultra-Low Bitrate Image Compression Ultra-low bitrate image compression has … impact of spatial downsampling on compression rate under ultra-low bitrate conditions, we …",
+        "abstract": "198 days ago - … Ultra-Low Bitrate Image Compression Ultra-low bitrate image compression has … impact of spatial downsampling on compression rate under ultra-low bitrate conditions, we …",
         "source": "Google Scholar",
         "scholar_result_id": "16d7YL74y-AJ",
         "scholar_position": 14,
@@ -1065,7 +1098,7 @@
         "paper_url": "https://arxiv.org/abs/2603.04115",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "211 days ago - … In recent years, substantial progress has been made in learned image compression for ultralow bitrate applications. Several works [16, 17, 18, 19, 20] have leveraged …",
+        "abstract": "212 days ago - … In recent years, substantial progress has been made in learned image compression for ultralow bitrate applications. Several works [16, 17, 18, 19, 20] have leveraged …",
         "source": "Google Scholar",
         "scholar_result_id": "KruzlbMcLKwJ",
         "scholar_position": 16,
@@ -1172,7 +1205,7 @@
         "paper_url": "https://arxiv.org/abs/2606.01608",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "122 days ago - … reconstructed images … compression method that fully leverages both semantic and pixel representations, thereby enhancing reconstruction fidelity under ultra-low bitrate …",
+        "abstract": "123 days ago - … reconstructed images … compression method that fully leverages both semantic and pixel representations, thereby enhancing reconstruction fidelity under ultra-low bitrate …",
         "source": "Google Scholar",
         "scholar_result_id": "eBahoeXBH_0J",
         "scholar_position": 9,
@@ -1207,7 +1240,7 @@
         "paper_url": "https://ieeexplore.ieee.org/abstract/document/11461744/",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "162 days ago - … it difficult to remain consistent with the original image; (ii) under constrained bit … ultralow bitrate compression, we propose a semantic token guided image compression …",
+        "abstract": "163 days ago - … it difficult to remain consistent with the original image; (ii) under constrained bit … ultralow bitrate compression, we propose a semantic token guided image compression …",
         "source": "Google Scholar",
         "scholar_result_id": "eNafOo5NaLEJ",
         "scholar_position": 11,
@@ -1269,12 +1302,12 @@
           "H Na",
           "P Zhao"
         ],
-        "date": "2026-10-02",
+        "date": "2026-10-03",
         "year": null,
         "paper_url": "https://openreview.net/pdf?id=jb43xbjJAF",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "23 days ago - … We investigated residual vector quantization (RVQ) as a compact side information route. In … The early RVQ/token results did not justify replacing the stable AEIC-ME final …",
+        "abstract": "24 days ago - … We investigated residual vector quantization (RVQ) as a compact side information route. In … The early RVQ/token results did not justify replacing the stable AEIC-ME final …",
         "source": "Google Scholar",
         "scholar_result_id": "M5IiHzPrCpcJ",
         "scholar_position": 4,
@@ -1565,7 +1598,7 @@
         "paper_url": "https://www.tdcommons.org/cgi/viewcontent.cgi?article=12828&context=dpubs_series",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "36 days ago - … of orthonormal multiresolution spaces (Vj⊂ Vj+ 1), Quadrature Mirror Filter (QMF) sub-band decomposition, and Linde-Buzo-Gray (LBG) Voronoi vector quantization. …",
+        "abstract": "37 days ago - … of orthonormal multiresolution spaces (Vj⊂ Vj+ 1), Quadrature Mirror Filter (QMF) sub-band decomposition, and Linde-Buzo-Gray (LBG) Voronoi vector quantization. …",
         "source": "Google Scholar",
         "scholar_result_id": "jlOLoLCm8vEJ",
         "scholar_position": 6,
@@ -1600,7 +1633,7 @@
         "paper_url": "https://arxiv.org/abs/2605.22061",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "133 days ago - … We further incorporate VQ-VAE quantization [30] to cluster the core category representations. The generated visual mask is applied to the quantized side information to re…",
+        "abstract": "134 days ago - … We further incorporate VQ-VAE quantization [30] to cluster the core category representations. The generated visual mask is applied to the quantized side information to re…",
         "source": "Google Scholar",
         "scholar_result_id": "q9Ke4hGUTeEJ",
         "scholar_position": 18,
@@ -1633,7 +1666,7 @@
         "paper_url": "https://arxiv.org/abs/2605.28992",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "136 days ago - … reconstruction’s residual, or RVQ-style codecs, whose … build a variable-rate RGB image codec (FRAPPE-Image)… audio codecs built on residual vector quantization [7]–[9] …",
+        "abstract": "137 days ago - … reconstruction’s residual, or RVQ-style codecs, whose … build a variable-rate RGB image codec (FRAPPE-Image)… audio codecs built on residual vector quantization [7]–[9] …",
         "source": "Google Scholar",
         "scholar_result_id": "x8_7lrOdn-wJ",
         "scholar_position": 19,
