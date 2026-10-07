@@ -8,9 +8,9 @@ title: Image Compression Paper Daily
 > High-precision daily reading list for learned, generative, low-bitrate image compression and vector quantization.
 > Sources: arXiv + Google Scholar (via SerpApi). OpenAlex is not used.
 
-**Last updated:** 2026-10-06 15:13 JST
+**Last updated:** 2026-10-07 14:50 JST
 
-**Unique papers this run:** 43  |  **New papers:** 2
+**Unique papers this run:** 43  |  **New papers:** 0
 
 ## Collection policy
 
@@ -29,12 +29,7 @@ title: Image Compression Paper Daily
 
 ## New papers
 
-### Learned Image Compression
-
-| Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
-|---|---|---|---|---|---|---|---|
-| 2026-10-06 | **NEW** Benchmarking Neural Image Compression with DCT-Based Spectral Diagnostics | N Kalmykov, R Dibo, Y Liu et al. | - | [Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7553244) | - | - | Google Scholar |
-| 2026 | **NEW** Mitigating Padding-Induced Degradation in Learned Image Compression via Gated Edge Adapter Tuning | Y Liuzhang, M Yan, Y Wu et al. | - | [Paper](https://ieeexplore.ieee.org/abstract/document/11718593/) | - | - | Google Scholar |
+No previously unseen papers were detected.
 
 ## Latest papers by topic
 
@@ -42,8 +37,8 @@ title: Image Compression Paper Daily
 
 | Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
 |---|---|---|---|---|---|---|---|
-| 2026-10-06 | Benchmarking Neural Image Compression with DCT-Based Spectral Diagnostics | N Kalmykov, R Dibo, Y Liu et al. | - | [Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7553244) | - | - | Google Scholar |
-| 2026-10-06 | JRD-ECV: Efficient Image Coding for Machine Vision via Edge-Guided Just Recognizable Distortion Optimization | S Nami, F Pakdaman, M Gabbouj | - | [Paper](https://openreview.net/forum?id=w3nmVLqvlc) | - | - | Google Scholar |
+| 2026-10-07 | Benchmarking Neural Image Compression with DCT-Based Spectral Diagnostics | N Kalmykov, R Dibo, Y Liu et al. | - | [Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7553244) | - | - | Google Scholar |
+| 2026-10-07 | JRD-ECV: Efficient Image Coding for Machine Vision via Edge-Guided Just Recognizable Distortion Optimization | S Nami, F Pakdaman, M Gabbouj | - | [Paper](https://openreview.net/forum?id=w3nmVLqvlc) | - | - | Google Scholar |
 | 2026-09-24 | VQ-LIC: Shared Vector-Quantized Learned Image Compression on a Resource-Constrained FPGA | Muhammad Fahd Ibrahim Bhatti, Abdullah Bin Faisal, Ahsan Usman et al. | BPP=0.1398, VQ/RVQ, Data=CLIC | [Paper](http://arxiv.org/abs/2609.29727v1) | - | - | arXiv, Google Scholar |
 | 2026-09-16 | PULSE: Unlocking Practical Image Compression on Single-Thread CPU | Zhaoyang Jia, Tianyu Zhang, Zihan Zheng et al. | - | [Paper](http://arxiv.org/abs/2609.18602v1) | [GitHub](https://github.com/microsoft/GenCodec/tree/main) | - | arXiv, Google Scholar |
 | 2026 | Ultra-Low Bitrate Image Compression with Dual-Branch Hybrid Attention and Multi-Scale Entropy Modeling | S Yue, Z Chen, D Yu et al. | Entropy model, Transformer, Low bitrate | [Paper](https://ieeexplore.ieee.org/abstract/document/11703934/) | - | - | Google Scholar |
@@ -53,7 +48,7 @@ title: Image Compression Paper Daily
 | 2026 | Mitigating Padding-Induced Degradation in Learned Image Compression via Gated Edge Adapter Tuning | Y Liuzhang, M Yan, Y Wu et al. | - | [Paper](https://ieeexplore.ieee.org/abstract/document/11718593/) | - | - | Google Scholar |
 | 2026 | Contour-guided latent quantization in learned image compression | K Chen, Y Fan | - | [Paper](https://www.sciencedirect.com/science/article/pii/S0141938226003653) | - | - | Google Scholar |
 | 2026 | LIC_MCM: Learned Image Compression with Mamba-CNN Mixture Architecture for Remote Sensing Images | Y Song, D Liu, X Liang et al. | - | [Paper](https://ieeexplore.ieee.org/abstract/document/11695179/) | - | - | Google Scholar |
-| 2026 | for Learned Image Compression | A El Mennaoui, G Hemrit, J Meehan | - | [Paper](https://books.google.com/books?hl=en&lr=&id=v_UKEgAAQBAJ&oi=fnd&pg=PA74&dq=%22learned+image+compression%22+OR+%22neural+image+compression%22+OR+%22learned+image+coding%22+OR+%22end-to-end+image+compression%22&ots=-q2DLS-py1&sig=n2gLw-k_fk0MHMuKcrnvsO5PSU4) | - | - | Google Scholar |
+| 2026 | for Learned Image Compression | A El Mennaoui, G Hemrit, J Meehan | - | [Paper](https://books.google.com/books?hl=en&lr=&id=v_UKEgAAQBAJ&oi=fnd&pg=PA74&dq=%22learned+image+compression%22+OR+%22neural+image+compression%22+OR+%22learned+image+coding%22+OR+%22end-to-end+image+compression%22&ots=-q2DMQ4pA0&sig=6ikTM12cc2Cgqo3S-OvM6vtSth4) | - | - | Google Scholar |
 
 ## Generative Image Compression
 
@@ -76,8 +71,8 @@ title: Image Compression Paper Daily
 
 | Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
 |---|---|---|---|---|---|---|---|
-| 2026-10-06 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
-| 2026-10-06 | Frozen Decoder, Better Bits: Per-Image Latent Rate-Distortion Optimization for Ultra-Low Bitrate Compression | CY Chen, R Sivakumar | Low bitrate | [Paper](https://openreview.net/forum?id=U9w7HZlK0i) | - | - | Google Scholar |
+| 2026-10-07 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
+| 2026-10-07 | Frozen Decoder, Better Bits: Per-Image Latent Rate-Distortion Optimization for Ultra-Low Bitrate Compression | CY Chen, R Sivakumar | Low bitrate | [Paper](https://openreview.net/forum?id=U9w7HZlK0i) | - | - | Google Scholar |
 | 2026-09-30 | ResARC: Residual-Aware AutoRegressive Coding for Ultra-Low Bitrate Image Compression | Qin Yan, Ruixiao Dong, Yutao Xie et al. | Diffusion, Generative, Entropy model, Transformer, Low bitrate | [Paper](http://arxiv.org/abs/2609.39451v1) | - | - | arXiv, Google Scholar |
 | 2026-09-30 | Rethinking Generative Image Compression at Extremely Low Bitrates | Tianyu Zhang, Zhaoyang Jia, Houqiang Li et al. | Diffusion, Generative, Low bitrate, Data=MS COCO | [Paper](http://arxiv.org/abs/2609.39315v1) | [GitHub](https://github.com/LuizScarlet/RAE-CoD) | - | arXiv |
 | 2026-09-25 | Rate-Adaptive One-Step Diffusion Compression for AIGC Images | Nitiz Khanal | BPP=0.025, PSNR=27.02, MS-SSIM=0.9176, LPIPS=0.0778, Diffusion | [Paper](http://arxiv.org/abs/2609.31795v1) | [GitHub](https://github.com/StarAtNyte/Rate-Adaptive-One-Step-Diffusion-Compression-Lovif-ECCV26) | - | arXiv |
@@ -93,7 +88,7 @@ title: Image Compression Paper Daily
 
 | Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
 |---|---|---|---|---|---|---|---|
-| 2026-10-06 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | VQ/RVQ, Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
+| 2026-10-07 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | VQ/RVQ, Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
 | 2026-09-24 | VQ-LIC: Shared Vector-Quantized Learned Image Compression on a Resource-Constrained FPGA | Muhammad Fahd Ibrahim Bhatti, Abdullah Bin Faisal, Ahsan Usman et al. | BPP=0.1398, VQ/RVQ, Data=CLIC | [Paper](http://arxiv.org/abs/2609.29727v1) | - | - | arXiv, Google Scholar |
 | 2026 | Clustered Codebook Quantization for 2D Gaussian-based Image Compression | R Cheng, Y Zhan, J Spjut et al. | VQ/RVQ | [Paper](https://arxiv.org/abs/2607.05667) | - | - | Google Scholar |
 | 2026 | Tree-Structured Vector Quantization For Efficient And Progressive Image Compression | X Wang, T Xu, Q Luo et al. | VQ/RVQ | [Paper](https://arxiv.org/abs/2609.03641) | - | - | Google Scholar |
