@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T13:29:28.584193+09:00",
+  "generated_at": "2026-10-25T13:34:23.113341+09:00",
   "lookback_days": 30,
   "topics": {
     "Learned Image Compression": [
@@ -12,12 +12,12 @@
           "Y Du",
           "I Oseledets"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7553244",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "21 days ago - Neural image compression (NIC) models are commonly evaluated with scalar rate-distortion metrics, which do not show how a codec treats individual spatial frequencies. …",
+        "abstract": "22 days ago - Neural image compression (NIC) models are commonly evaluated with scalar rate-distortion metrics, which do not show how a codec treats individual spatial frequencies. …",
         "source": "Google Scholar",
         "scholar_result_id": "zg6PMCRUgh4J",
         "scholar_position": 13,
@@ -42,12 +42,12 @@
           "J Kraiem",
           "Z Chen"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://jasserkraiem.com/papers/learned-image-compression-kraiem.pdf",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "17 days ago - Learned image compression (LIC) has emerged as a promising alternative to conventional image compression (CIC) methods, leveraging deep learning techniques to …",
+        "abstract": "18 days ago - Learned image compression (LIC) has emerged as a promising alternative to conventional image compression (CIC) methods, leveraging deep learning techniques to …",
         "source": "Google Scholar",
         "scholar_result_id": "hOpqDMlHvw0J",
         "scholar_position": 11,
@@ -76,12 +76,12 @@
           "J Jiang",
           "X Liu"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://dl.acm.org/doi/abs/10.1145/3859249",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "1 day ago - Learned image compression (LIC) has emerged as a promising solution for efficient image storage and transmission. However, existing methods often struggle to …",
+        "abstract": "2 days ago - Learned image compression (LIC) has emerged as a promising solution for efficient image storage and transmission. However, existing methods often struggle to …",
         "source": "Google Scholar",
         "scholar_result_id": "wM2wkif-s2oJ",
         "scholar_position": 1,
@@ -189,51 +189,6 @@
         ]
       },
       {
-        "title": "VQ-LIC: Shared Vector-Quantized Learned Image Compression on a Resource-Constrained FPGA",
-        "authors": [
-          "Muhammad Fahd Ibrahim Bhatti",
-          "Abdullah Bin Faisal",
-          "Ahsan Usman",
-          "Naveed Anwar Bhatti",
-          "Muhammad Ali Siddiqi"
-        ],
-        "date": "2026-09-24",
-        "paper_url": "http://arxiv.org/abs/2609.29727v1",
-        "pdf_url": "https://arxiv.org/pdf/2609.29727v1",
-        "code_url": null,
-        "abstract": "Learned image compression (LIC) is hard to deploy on severely resource-constrained FPGAs, since how fast it actually runs depends not just on arithmetic count, but also on memory traffic, imbalance between different operations, and how the hardware batches its work. We present VQ-LIC, an asymmetric edge-cloud codec in which a compact INT8 depthwise (DW)-pointwise (PW) analysis transform and multi-codebook vector quantization (VQ) run at the edge on a reusable DW/PW engine pair, while reconstruction is handled by a larger cloud decoder. Since VQ codeword matching is expressible as a dot product, it is mapped directly onto the same PW engine, removing the need for a separate VQ compute array, to our knowledge a first for FPGA LIC. A novel latency model, derived from deterministic RTL cycle counts of an FPGA's read, DW, PW, and write costs, predicts an analysis transform's per-block latency; since VQ shares the same PW datapath, the model applies to VQ as well. Validated directly against silicon, the model predicts deployed analysis and VQ latency within 0.26\\% and 0.05\\%, and guides the selection of a three-block $16$-$48$-$64$ transform. Post-training codebook reduction then cuts VQ arithmetic and codebook storage by $4\\times$ and shrinks the fixed-width latent representation. On a 220-DSP Zynq-7020, VQ-LIC's mid-rate preset reaches 0.1398 bits per pixel at 28.69 dB PSNR and 13.06 dB MS-SSIM on CLIC~2017, outperforming a similarly sized neural encoder and reaching a rate-distortion range comparable to a codec three orders of magnitude larger. The complete 0.1945-kMAC/pixel analysis-VQ pipeline runs at 47.98 frames per second and 42.84 mJ per frame on silicon, using an order of magnitude fewer DSPs than comparable FPGA LIC accelerators while achieving lower bitrate, higher throughput, and lower energy per frame at a modest PSNR tradeoff.",
-        "source": "arXiv",
-        "arxiv_id": "2609.29727",
-        "doi": null,
-        "comment": "",
-        "journal_ref": "",
-        "categories": [
-          "cs.AR",
-          "eess.IV"
-        ],
-        "primary_category": "cs.AR",
-        "topics": [
-          "Learned Image Compression"
-        ],
-        "matched_queries": [
-          "\"learned image compression\" OR \"neural image compression\" OR \"learned image coding\" OR \"end-to-end image compression\"",
-          "(ti:\"learned image compression\" OR abs:\"learned image compression\")"
-        ],
-        "relevance_score": 38,
-        "signals": [
-          "BPP=0.1398",
-          "VQ/RVQ",
-          "Data=CLIC"
-        ],
-        "sources": [
-          "arXiv",
-          "Google Scholar"
-        ],
-        "scholar_result_id": "c7Y2Zs44l4oJ",
-        "scholar_cited_by": null,
-        "scholar_versions": null
-      },
-      {
         "title": "Low-Complexity Parallel Decoding for Non-Autoregressive Learned Image Compression",
         "authors": [
           "L Zhang",
@@ -247,7 +202,7 @@
         "paper_url": "https://www.mdpi.com/1099-4300/28/10/1134",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "8 days ago - … the rate–distortion performance of learned image compression, but their spatial … This paper presents a latency-oriented learned image compression framework that …",
+        "abstract": "9 days ago - … the rate–distortion performance of learned image compression, but their spatial … This paper presents a latency-oriented learned image compression framework that …",
         "source": "Google Scholar",
         "scholar_result_id": "qhN8nZlJHTEJ",
         "scholar_position": 5,
@@ -281,7 +236,7 @@
         "paper_url": "https://ieeexplore.ieee.org/abstract/document/11733919/",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "10 days ago - Learned image compression benefits from representations that jointly preserve large-scale structures and local details while remaining amenable to accurate entropy …",
+        "abstract": "11 days ago - Learned image compression benefits from representations that jointly preserve large-scale structures and local details while remaining amenable to accurate entropy …",
         "source": "Google Scholar",
         "scholar_result_id": "h6O_n7mXBs4J",
         "scholar_position": 9,
@@ -316,7 +271,7 @@
         "paper_url": "https://ieeexplore.ieee.org/abstract/document/11740777/",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "3 days ago - … Abstract—This paper presents a learned image compression framework that exploits … new generic framework to utilize external references for learned image compression. …",
+        "abstract": "4 days ago - … Abstract—This paper presents a learned image compression framework that exploits … new generic framework to utilize external references for learned image compression. …",
         "source": "Google Scholar",
         "scholar_result_id": "DILn2VQ7nToJ",
         "scholar_position": 2,
@@ -349,7 +304,7 @@
         "paper_url": "https://www.sciencedirect.com/science/article/pii/S0167865526003922",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "8 days ago - Learned image compression (LIC) is a crucial and active research field in the BigData era, in which existing methods have explored a variety of designs based on …",
+        "abstract": "9 days ago - Learned image compression (LIC) is a crucial and active research field in the BigData era, in which existing methods have explored a variety of designs based on …",
         "source": "Google Scholar",
         "scholar_result_id": "VglZSNXmteEJ",
         "scholar_position": 6,
@@ -380,7 +335,7 @@
         "paper_url": "https://arxiv.org/abs/2610.22421",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "8 days ago - End-to-end learned image coding (LIC) has achieved substantial improvements in rate--distortion (R--D) performance, yet practical deployment requires addressing a …",
+        "abstract": "9 days ago - End-to-end learned image coding (LIC) has achieved substantial improvements in rate--distortion (R--D) performance, yet practical deployment requires addressing a …",
         "source": "Google Scholar",
         "scholar_result_id": "1MeKttLRzzIJ",
         "scholar_position": 7,
@@ -412,13 +367,45 @@
         "paper_url": "https://ieeexplore.ieee.org/abstract/document/11733779/",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "11 days ago - Most onboard remote sensing image compression pipelines rely on conventional codecs because operational downlink requires a guaranteed compression ratio lower …",
+        "abstract": "12 days ago - Most onboard remote sensing image compression pipelines rely on conventional codecs because operational downlink requires a guaranteed compression ratio lower …",
         "source": "Google Scholar",
         "scholar_result_id": "qymkHZvftAoJ",
         "scholar_position": 10,
         "scholar_cited_by": null,
         "scholar_versions": null,
         "publication": "L Zhang, Q Zhou, L Huyan, R Liu - IEEE Geoscience and …, 2026 - ieeexplore.ieee.org",
+        "topics": [
+          "Learned Image Compression"
+        ],
+        "matched_queries": [
+          "\"learned image compression\" OR \"neural image compression\" OR \"learned image coding\" OR \"end-to-end image compression\""
+        ],
+        "relevance_score": 26,
+        "signals": [],
+        "sources": [
+          "Google Scholar"
+        ]
+      },
+      {
+        "title": "Mitigating Padding-Induced Degradation in Learned Image Compression via Gated Edge Adapter Tuning",
+        "authors": [
+          "Y Liuzhang",
+          "M Yan",
+          "Y Wu",
+          "H Zhou"
+        ],
+        "date": "2026",
+        "year": "2026",
+        "paper_url": "https://ieeexplore.ieee.org/abstract/document/11718593/",
+        "pdf_url": null,
+        "code_url": null,
+        "abstract": "23 days ago - Learned image compression (LIC) models often require input sizes to satisfy architecture-dependent alignment constraints induced by repeated downsampling and, in …",
+        "source": "Google Scholar",
+        "scholar_result_id": "NNNOLv4jbz8J",
+        "scholar_position": 14,
+        "scholar_cited_by": null,
+        "scholar_versions": null,
+        "publication": "Y Liuzhang, M Yan, Y Wu, H Zhou… - IEEE Transactions …, 2026 - ieeexplore.ieee.org",
         "topics": [
           "Learned Image Compression"
         ],
@@ -440,12 +427,12 @@
           "Y Liu",
           "N Ling"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://www.researchgate.net/profile/Yifei-Pei-7/publication/415323795_Adaptive_Fused_Prior_Transfer_for_Controllable_Generative_Image_Compression_Supplementary_Materialspdf/data/6ac600cb5770bb0daeda77f2/Adaptive-Fused-Prior-Transfer-for-Controllable-Generative-Image-Compression-Supplementary-Materials.pdf",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "15 days ago - … In the very-low-bitrate generative image compression regime, relying on a single metric is insufficient to characterize codec performance due to the fundamental rate-…",
+        "abstract": "16 days ago - … In the very-low-bitrate generative image compression regime, relying on a single metric is insufficient to characterize codec performance due to the fundamental rate-…",
         "source": "Google Scholar",
         "scholar_result_id": "RI7wq_NgbgcJ",
         "scholar_position": 5,
@@ -623,7 +610,7 @@
         "paper_url": "https://arxiv.org/abs/2609.39451",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "22 days ago - … We identify two residuals inherent to autoregressive generative compression: the … as an effective design principle for ultra-low bitrate generative image compression. …",
+        "abstract": "23 days ago - … We identify two residuals inherent to autoregressive generative compression: the … as an effective design principle for ultra-low bitrate generative image compression. …",
         "source": "Google Scholar",
         "scholar_result_id": "Ei3uzVmD1igJ",
         "scholar_position": 7,
@@ -661,7 +648,7 @@
         "paper_url": "https://arxiv.org/abs/2608.28687",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "58 days ago - … To address these challenges, we propose FLM, a frequencyaware language model for generative image compression, which extends the LLM-based compression …",
+        "abstract": "59 days ago - … To address these challenges, we propose FLM, a frequencyaware language model for generative image compression, which extends the LLM-based compression …",
         "source": "Google Scholar",
         "scholar_result_id": "J-RJKBIk5IgJ",
         "scholar_position": 8,
@@ -693,7 +680,7 @@
         "paper_url": "https://ph04.tci-thaijo.org/index.php/SUJST/article/view/12181",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "9 days ago - … To address this challenge, this paper introduces a hybrid generative image compression framework that unites the representational power of a Variational Autoencoder (…",
+        "abstract": "10 days ago - … To address this challenge, this paper introduces a hybrid generative image compression framework that unites the representational power of a Variational Autoencoder (…",
         "source": "Google Scholar",
         "scholar_result_id": "Ds9YqCRxeb8J",
         "scholar_position": 3,
@@ -727,7 +714,7 @@
         "paper_url": "https://arxiv.org/abs/2608.03517",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "80 days ago - … Codebook-driven generative compression uses a pretrained image or video … video and DDCM-style diffusion image compression, preserving zerotraining deployment and …",
+        "abstract": "81 days ago - … Codebook-driven generative compression uses a pretrained image or video … video and DDCM-style diffusion image compression, preserving zerotraining deployment and …",
         "source": "Google Scholar",
         "scholar_result_id": "M0ZBetm2THAJ",
         "scholar_position": 10,
@@ -750,6 +737,40 @@
         ]
       },
       {
+        "title": "Uncertainty-Gated Generative Compression for Structure-Preserving Multimedia Retrieval",
+        "authors": [
+          "Y Ding",
+          "Z Chen",
+          "J Wei"
+        ],
+        "date": "2026",
+        "year": "2026",
+        "paper_url": "https://dl.acm.org/doi/abs/10.1145/3805622.3810699",
+        "pdf_url": null,
+        "code_url": null,
+        "abstract": "131 days ago - … Generative image compression can synthesize perceptually plausible details at low bitrates, yet existing methods separate structure-critical from synthesizable information …",
+        "source": "Google Scholar",
+        "scholar_result_id": "8CpkUOj_uEQJ",
+        "scholar_position": 12,
+        "scholar_cited_by": null,
+        "scholar_versions": null,
+        "publication": "Y Ding, Z Chen, J Wei - … of the 2026 International Conference on …, 2026 - dl.acm.org",
+        "topics": [
+          "Generative Image Compression"
+        ],
+        "matched_queries": [
+          "\"generative image compression\" OR \"diffusion image compression\" OR \"generative image coding\" OR \"generative compression\" image"
+        ],
+        "relevance_score": 13,
+        "signals": [
+          "Generative",
+          "Low bitrate"
+        ],
+        "sources": [
+          "Google Scholar"
+        ]
+      },
+      {
         "title": "Next-frame decoding for ultra-low-bitrate image compression with video diffusion priors",
         "authors": [
           "Y Chen",
@@ -764,10 +785,10 @@
         "paper_url": "https://link.springer.com/chapter/10.1007/978-3-032-37422-6_15",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "220 days ago - We present a novel paradigm for ultra-low-bitrate image compression (ULB-IC) that exploits the “temporal” evolution in generative image compression. Specifically, we …",
+        "abstract": "221 days ago - We present a novel paradigm for ultra-low-bitrate image compression (ULB-IC) that exploits the “temporal” evolution in generative image compression. Specifically, we …",
         "source": "Google Scholar",
         "scholar_result_id": "6eljHFTEH3IJ",
-        "scholar_position": 12,
+        "scholar_position": 14,
         "scholar_cited_by": 6,
         "scholar_versions": 3,
         "publication": "Y Chen, C Zhou, J Li, X Ling, B He, J Dai… - … on Computer Vision, 2026 - Springer",
@@ -787,6 +808,42 @@
         ]
       },
       {
+        "title": "SDGIC: A Semantic Disambiguation-Guided Generative Image Compression Method for Ultra-Low Bitrates",
+        "authors": [
+          "K Wang",
+          "L He",
+          "H Fu",
+          "H Bi",
+          "F Li"
+        ],
+        "date": "2025",
+        "year": "2025",
+        "paper_url": "https://arxiv.org/abs/2512.06344",
+        "pdf_url": null,
+        "code_url": null,
+        "abstract": "322 days ago - … Generative image compression offers a … image content, generative compression exploits priors learned through large-scale pretraining and requires only compact image-…",
+        "source": "Google Scholar",
+        "scholar_result_id": "2r-6Q96BcLwJ",
+        "scholar_position": 18,
+        "scholar_cited_by": null,
+        "scholar_versions": null,
+        "publication": "K Wang, L He, H Fu, H Bi, F Li - arXiv preprint arXiv:2512.06344, 2025 - arxiv.org",
+        "topics": [
+          "Generative Image Compression"
+        ],
+        "matched_queries": [
+          "\"generative image compression\" OR \"diffusion image compression\" OR \"generative image coding\" OR \"generative compression\" image"
+        ],
+        "relevance_score": 23,
+        "signals": [
+          "Generative",
+          "Low bitrate"
+        ],
+        "sources": [
+          "Google Scholar"
+        ]
+      },
+      {
         "title": "Beyond hallucinations: A multimodal-guided task-aware generative image compression for ultra-low bitrate",
         "authors": [
           "K Wang",
@@ -800,10 +857,10 @@
         "paper_url": "https://ui.adsabs.harvard.edu/abs/2025arXiv251206344W/abstract",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "319 days ago - Generative image compression has recently shown impressive perceptual quality, but often suffers from semantic deviations caused by generative hallucinations at ultra-…",
+        "abstract": "320 days ago - Generative image compression has recently shown impressive perceptual quality, but often suffers from semantic deviations caused by generative hallucinations at ultra-…",
         "source": "Google Scholar",
         "scholar_result_id": "qd_a1Cf92IcJ",
-        "scholar_position": 14,
+        "scholar_position": 17,
         "scholar_cited_by": 1,
         "scholar_versions": null,
         "publication": "K Wang, L He, H Fu, H Bi, F Li - arXiv e-prints, 2025 - ui.adsabs.harvard.edu",
@@ -832,12 +889,12 @@
           "H Na",
           "P Zhao"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://openreview.net/pdf?id=jb43xbjJAF",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "45 days ago - … We presented the XIAOQING system for the LoViF 2026 ultra-low bitrate image compression challenge. The final submission uses a practical entropy-coded AEIC-ME …",
+        "abstract": "46 days ago - … We presented the XIAOQING system for the LoViF 2026 ultra-low bitrate image compression challenge. The final submission uses a practical entropy-coded AEIC-ME …",
         "source": "Google Scholar",
         "scholar_result_id": "M5IiHzPrCpcJ",
         "scholar_position": 5,
@@ -864,12 +921,12 @@
           "CY Chen",
           "R Sivakumar"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://openreview.net/forum?id=U9w7HZlK0i",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "45 days ago - … ultra-low-bitrate regime all three gaps are proportionally large: with only ∼104 bits per image… LoViF 2026 Challenge on Ultra-Low Bitrate Image Compression, which fixes …",
+        "abstract": "46 days ago - … ultra-low-bitrate regime all three gaps are proportionally large: with only ∼104 bits per image… LoViF 2026 Challenge on Ultra-Low Bitrate Image Compression, which fixes …",
         "source": "Google Scholar",
         "scholar_result_id": "ew-3e9h3bicJ",
         "scholar_position": 6,
@@ -1245,10 +1302,10 @@
         "paper_url": "https://openaccess.thecvf.com/content/CVPR2026/html/Zhang_Ultra-Low_Bitrate_Perceptual_Image_Compression_with_Shallow_Encoder_CVPR_2026_paper.html",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "311 days ago - … 70] that rely on complex encoders, we investigate the potential of shallow transform encoder in ultra-low bitrate image compression. We begin by analyzing the theoretical …",
+        "abstract": "312 days ago - … 70] that rely on complex encoders, we investigate the potential of shallow transform encoder in ultra-low bitrate image compression. We begin by analyzing the theoretical …",
         "source": "Google Scholar",
         "scholar_result_id": "VIfKvinVyeoJ",
-        "scholar_position": 15,
+        "scholar_position": 14,
         "scholar_cited_by": 12,
         "scholar_versions": 4,
         "publication": "T Zhang, D Liu, CW Chen - … of the IEEE/CVF Conference on …, 2026 - openaccess.thecvf.com",
@@ -1281,7 +1338,7 @@
         "paper_url": "https://ieeexplore.ieee.org/abstract/document/11703934/",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "31 days ago - … compression efficiency (referred to as compression ratio in this paper) and reconstruction quality becomes particularly critical in ultralow bitrate … under ultra-low bitrate …",
+        "abstract": "32 days ago - … compression efficiency (referred to as compression ratio in this paper) and reconstruction quality becomes particularly critical in ultralow bitrate … under ultra-low bitrate …",
         "source": "Google Scholar",
         "scholar_result_id": "8VBavvtXJngJ",
         "scholar_position": 4,
@@ -1313,12 +1370,12 @@
           "H Na",
           "P Zhao"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://openreview.net/pdf?id=jb43xbjJAF",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "45 days ago - … We investigated residual vector quantization (RVQ) as a compact side information route. In … The early RVQ/token results did not justify replacing the stable AEIC-ME final …",
+        "abstract": "46 days ago - … We investigated residual vector quantization (RVQ) as a compact side information route. In … The early RVQ/token results did not justify replacing the stable AEIC-ME final …",
         "source": "Google Scholar",
         "scholar_result_id": "M5IiHzPrCpcJ",
         "scholar_position": 8,
@@ -1346,12 +1403,12 @@
           "H Adnan",
           "HA Al-jashamy"
         ],
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "year": null,
         "paper_url": "https://cervantes.erdospublish.org/archive/2025/turcomat.2025.16.issue-1/TURCOMAT.2025.1.00005/Color_Image_Compression_Using_Vector_Quantization_with_Fuzzy_Logic.pdf",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "26 days ago - … Image compression is a critical method for minimizing … color image compression by incorporating vector quantization (… Vector quantization is another commonly used lossy …",
+        "abstract": "27 days ago - … Image compression is a critical method for minimizing … color image compression by incorporating vector quantization (… Vector quantization is another commonly used lossy …",
         "source": "Google Scholar",
         "scholar_result_id": "38WZdIUGlLYJ",
         "scholar_position": 4,
@@ -1423,75 +1480,30 @@
       {
         "title": "VQ-LIC: Shared Vector-Quantized Learned Image Compression on a Resource-Constrained FPGA",
         "authors": [
-          "Muhammad Fahd Ibrahim Bhatti",
-          "Abdullah Bin Faisal",
-          "Ahsan Usman",
-          "Naveed Anwar Bhatti",
-          "Muhammad Ali Siddiqi"
-        ],
-        "date": "2026-09-24",
-        "paper_url": "http://arxiv.org/abs/2609.29727v1",
-        "pdf_url": "https://arxiv.org/pdf/2609.29727v1",
-        "code_url": null,
-        "abstract": "Learned image compression (LIC) is hard to deploy on severely resource-constrained FPGAs, since how fast it actually runs depends not just on arithmetic count, but also on memory traffic, imbalance between different operations, and how the hardware batches its work. We present VQ-LIC, an asymmetric edge-cloud codec in which a compact INT8 depthwise (DW)-pointwise (PW) analysis transform and multi-codebook vector quantization (VQ) run at the edge on a reusable DW/PW engine pair, while reconstruction is handled by a larger cloud decoder. Since VQ codeword matching is expressible as a dot product, it is mapped directly onto the same PW engine, removing the need for a separate VQ compute array, to our knowledge a first for FPGA LIC. A novel latency model, derived from deterministic RTL cycle counts of an FPGA's read, DW, PW, and write costs, predicts an analysis transform's per-block latency; since VQ shares the same PW datapath, the model applies to VQ as well. Validated directly against silicon, the model predicts deployed analysis and VQ latency within 0.26\\% and 0.05\\%, and guides the selection of a three-block $16$-$48$-$64$ transform. Post-training codebook reduction then cuts VQ arithmetic and codebook storage by $4\\times$ and shrinks the fixed-width latent representation. On a 220-DSP Zynq-7020, VQ-LIC's mid-rate preset reaches 0.1398 bits per pixel at 28.69 dB PSNR and 13.06 dB MS-SSIM on CLIC~2017, outperforming a similarly sized neural encoder and reaching a rate-distortion range comparable to a codec three orders of magnitude larger. The complete 0.1945-kMAC/pixel analysis-VQ pipeline runs at 47.98 frames per second and 42.84 mJ per frame on silicon, using an order of magnitude fewer DSPs than comparable FPGA LIC accelerators while achieving lower bitrate, higher throughput, and lower energy per frame at a modest PSNR tradeoff.",
-        "source": "arXiv",
-        "arxiv_id": "2609.29727",
-        "doi": null,
-        "comment": "",
-        "journal_ref": "",
-        "categories": [
-          "cs.AR",
-          "eess.IV"
-        ],
-        "primary_category": "cs.AR",
-        "topics": [
-          "Vector Quantization"
-        ],
-        "matched_queries": [
-          "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")",
-          "(ti:\"vector quantized\" OR abs:\"vector quantized\" OR ti:\"vector-quantization\" OR abs:\"vector-quantization\") AND (ti:\"image compression\" OR abs:\"image compression\")"
-        ],
-        "relevance_score": 40,
-        "signals": [
-          "BPP=0.1398",
-          "VQ/RVQ",
-          "Data=CLIC"
-        ],
-        "sources": [
-          "arXiv",
-          "Google Scholar"
-        ],
-        "scholar_result_id": "c7Y2Zs44l4oJ",
-        "scholar_cited_by": null,
-        "scholar_versions": null
-      },
-      {
-        "title": "DHVQ: Dynamic Codebook Learning with Hierarchical Quantization for Efficient Neural Image Compression",
-        "authors": [
-          "Y Kuang",
-          "Z Bie",
-          "H Lei",
-          "H Bie"
+          "MFI Bhatti",
+          "AB Faisal",
+          "A Usman",
+          "NA Bhatti"
         ],
         "date": "2026",
         "year": "2026",
-        "paper_url": "https://ieeexplore.ieee.org/abstract/document/11504549/",
+        "paper_url": "https://arxiv.org/abs/2609.29727",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "210 days ago - … quality in existing vector quantization (VQ) … vector quantized autoencoder, termed DHVQ. The core innovation is a novel dynamic-aware hierarchical vector quantization …",
+        "abstract": "30 days ago - … a first for FPGA learned image compression. Section II … Learned Image Compression Learned image compression … VQ-VAE [12] established a learned codebook of rep…",
         "source": "Google Scholar",
-        "scholar_result_id": "29bBeh3O6XgJ",
-        "scholar_position": 18,
+        "scholar_result_id": "c7Y2Zs44l4oJ",
+        "scholar_position": 5,
         "scholar_cited_by": null,
         "scholar_versions": null,
-        "publication": "Y Kuang, Z Bie, H Lei, H Bie - 2026 IEEE 8th International …, 2026 - ieeexplore.ieee.org",
+        "publication": "MFI Bhatti, AB Faisal, A Usman, NA Bhatti… - arXiv preprint arXiv …, 2026 - arxiv.org",
         "topics": [
           "Vector Quantization"
         ],
         "matched_queries": [
           "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")"
         ],
-        "relevance_score": 35,
+        "relevance_score": 30,
         "signals": [
           "VQ/RVQ"
         ],
@@ -1514,7 +1526,7 @@
         "paper_url": "https://arxiv.org/abs/2609.03641",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "50 days ago - … Progic: Progressive and lightweight generative image compression with residual vector quantization. In Proceedings of the IEEE/CVF Conference on Computer Vision and …",
+        "abstract": "51 days ago - … Progic: Progressive and lightweight generative image compression with residual vector quantization. In Proceedings of the IEEE/CVF Conference on Computer Vision and …",
         "source": "Google Scholar",
         "scholar_result_id": "XSnPvurivSIJ",
         "scholar_position": 9,
@@ -1537,40 +1549,6 @@
         ]
       },
       {
-        "title": "Clustered Codebook Quantization for 2D Gaussian-based Image Compression",
-        "authors": [
-          "R Cheng",
-          "Y Zhan",
-          "J Spjut",
-          "K Akşit"
-        ],
-        "date": "2026",
-        "year": "2026",
-        "paper_url": "https://arxiv.org/abs/2607.05667",
-        "pdf_url": null,
-        "code_url": null,
-        "abstract": "116 days ago - … Vector Quantization (UQ) codebook, and (3) color c using a Residual Vector Quantization (… loss combining image reconstruction and vector quantization terms: L = Lrecon (…",
-        "source": "Google Scholar",
-        "scholar_result_id": "FfKuVjTEJbEJ",
-        "scholar_position": 15,
-        "scholar_cited_by": null,
-        "scholar_versions": 4,
-        "publication": "R Cheng, Y Zhan, J Spjut, K Akşit - arXiv preprint arXiv:2607.05667, 2026 - arxiv.org",
-        "topics": [
-          "Vector Quantization"
-        ],
-        "matched_queries": [
-          "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")"
-        ],
-        "relevance_score": 30,
-        "signals": [
-          "VQ/RVQ"
-        ],
-        "sources": [
-          "Google Scholar"
-        ]
-      },
-      {
         "title": "Tree-Structured Vector Quantization For Efficient And Progressive Image Compression",
         "authors": [
           "X Wang",
@@ -1585,7 +1563,7 @@
         "paper_url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260903641W/abstract",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "50 days ago - … Vector-quantization based image compression has achieved strong rate--distortion … tree-structured vector quantization framework for learned image compression. Tree-VQ …",
+        "abstract": "51 days ago - … Vector-quantization based image compression has achieved strong rate--distortion … tree-structured vector quantization framework for learned image compression. Tree-VQ …",
         "source": "Google Scholar",
         "scholar_result_id": "i3oYov2IlwAJ",
         "scholar_position": 10,
@@ -1618,7 +1596,7 @@
         "paper_url": "https://www.researchgate.net/profile/Ahmed-Fanfakh/publication/414642549_Hybrid_Lossy_Image_Compression_Using_Bilateral_Filtering_Vector_Quantization_and_Entropy_Coding/links/6ab8c335b6ed5276291a0de3/Hybrid-Lossy-Image-Compression-Using-Bilateral-Filtering-Vector-Quantization-and-Entropy-Coding.pdf",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "83 days ago - … Efficient image compression requires an appropriate … image compression framework that combines bilateral filtering, Linde–Buzo–Gray (LBG)-based vector quantization (…",
+        "abstract": "84 days ago - … Efficient image compression requires an appropriate … image compression framework that combines bilateral filtering, Linde–Buzo–Gray (LBG)-based vector quantization (…",
         "source": "Google Scholar",
         "scholar_result_id": "_XVgu5x7woQJ",
         "scholar_position": 13,
@@ -1640,6 +1618,40 @@
         ]
       },
       {
+        "title": "Bridging the Gap between Implicit and Explicit Representation for Efficient Image Compression",
+        "authors": [
+          "Y Zhang",
+          "Y Li",
+          "W Dai",
+          "CH Lim"
+        ],
+        "date": "2026",
+        "year": "2026",
+        "paper_url": "https://ieeexplore.ieee.org/abstract/document/11494850/",
+        "pdf_url": null,
+        "code_url": null,
+        "abstract": "180 days ago - … efficiency in neural image compression. Additionally, we strive … an efficient lossy image compression framework. We … schemes: entropy coding and vector quantization. The …",
+        "source": "Google Scholar",
+        "scholar_result_id": "yO9kOfDNp4EJ",
+        "scholar_position": 15,
+        "scholar_cited_by": 1,
+        "scholar_versions": 2,
+        "publication": "Y Zhang, Y Li, W Dai, CH Lim… - … on Circuits and …, 2026 - ieeexplore.ieee.org",
+        "topics": [
+          "Vector Quantization"
+        ],
+        "matched_queries": [
+          "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")"
+        ],
+        "relevance_score": 20,
+        "signals": [
+          "VQ/RVQ"
+        ],
+        "sources": [
+          "Google Scholar"
+        ]
+      },
+      {
         "title": "Architectural and Mathematical Foundations of Transform Coding in Image Compression: From Multiresolution Wavelet Pyramids to Hardware-Accelerated …",
         "authors": [
           "GK Tummala"
@@ -1649,7 +1661,7 @@
         "paper_url": "https://www.tdcommons.org/cgi/viewcontent.cgi?article=12828&context=dpubs_series",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "58 days ago - … of orthonormal multiresolution spaces (Vj⊂ Vj+ 1), Quadrature Mirror Filter (QMF) sub-band decomposition, and Linde-Buzo-Gray (LBG) Voronoi vector quantization. …",
+        "abstract": "59 days ago - … of orthonormal multiresolution spaces (Vj⊂ Vj+ 1), Quadrature Mirror Filter (QMF) sub-band decomposition, and Linde-Buzo-Gray (LBG) Voronoi vector quantization. …",
         "source": "Google Scholar",
         "scholar_result_id": "jlOLoLCm8vEJ",
         "scholar_position": 11,
@@ -1671,32 +1683,32 @@
         ]
       },
       {
-        "title": "Deep learning-based image compression for wireless communications: impacts on robustness, throughput, and latency",
+        "title": "A lightweight perceptual-guided VQVAE for high-fidelity image compression",
         "authors": [
-          "M Naseri",
-          "P Ashtari",
-          "M Seif",
-          "E De Poorter"
+          "Z Bie",
+          "Y Kuang",
+          "H Lei",
+          "H Bie"
         ],
         "date": "2026",
         "year": "2026",
-        "paper_url": "https://www.nature.com/articles/s44459-025-00019-6",
+        "paper_url": "https://www.nature.com/articles/s41598-026-53855-z",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "204 days ago - … Traditional image compression techniques have been the cornerstone of digital … been repurposed for image compression by leveraging vector quantization in the latent …",
+        "abstract": "220 days ago - … While maintaining the simplicity and efficiency of the VQ-VAE architecture, our work … image compression populate a spectrum between two extremes: lightweight VQ-VAE …",
         "source": "Google Scholar",
-        "scholar_result_id": "LN1aLMwU59gJ",
+        "scholar_result_id": "lbMYuK3wx4IJ",
         "scholar_position": 17,
-        "scholar_cited_by": 1,
-        "scholar_versions": 3,
-        "publication": "M Naseri, P Ashtari, M Seif, E De Poorter… - npj Wireless …, 2026 - nature.com",
+        "scholar_cited_by": null,
+        "scholar_versions": 7,
+        "publication": "Z Bie, Y Kuang, H Lei, H Bie - Scientific Reports, 2026 - nature.com",
         "topics": [
           "Vector Quantization"
         ],
         "matched_queries": [
           "(\"vector quantized\" OR \"vector-quantized\" OR \"vector quantization\" OR \"residual vector quantization\" OR RVQ OR \"VQ-VAE\") AND (\"image compression\" OR \"image coding\" OR \"image codec\")"
         ],
-        "relevance_score": 17,
+        "relevance_score": 15,
         "signals": [
           "VQ/RVQ"
         ],
@@ -1715,7 +1727,7 @@
         "paper_url": "https://dl.acm.org/doi/abs/10.1145/3795101.3814710",
         "pdf_url": null,
         "code_url": null,
-        "abstract": "102 days ago - … Codebook design in Vector Quantization is a … the codebook for lossy image compression using the Kodak dataset. … Vector quantization-driven image compression through …",
+        "abstract": "103 days ago - … Codebook design in Vector Quantization is a … the codebook for lossy image compression using the Kodak dataset. … Vector quantization-driven image compression through …",
         "source": "Google Scholar",
         "scholar_result_id": "OSbfQ1gEx2UJ",
         "scholar_position": 14,
