@@ -118,7 +118,7 @@
     "scholar_cited_by": null,
     "scholar_versions": null,
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:f81668efef3dde0c2a262bd23f025edcfa8dbbf2": {
     "title": "PULSE: Unlocking Practical Image Compression on Single-Thread CPU",
@@ -213,7 +213,7 @@
     "scholar_cited_by": null,
     "scholar_versions": 2,
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:4b54e5bd80a310afeff5132a0239b91eed49b88d": {
     "title": "Semantic Image Compression for Rate, Distortion, and Performance Optimization: A Systematic Review with Quantitative Synthesis",
@@ -289,7 +289,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:ad15c441a9fbf8e6bea94dd1467292f10ad1d431": {
     "title": "Utilization-Aware Chiplet Dataflow Engine for End-To-End Learned Image Compression with Entropy–Transform Pipeline Fusion",
@@ -504,7 +504,7 @@
     "scholar_cited_by": null,
     "scholar_versions": null,
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28",
+    "last_seen": "2026-10-29",
     "scholar_result_id": "YeigXm-V2kgJ"
   },
   "title:c7fe7131413a45e4cb4e6805e2532f799b026920": {
@@ -545,7 +545,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-26"
+    "last_seen": "2026-10-29"
   },
   "title:62f3d90a11fcc90ecdf1efd978419f596faced95": {
     "title": "Dual-Constrained Diffusion Image Compression for Operational Rate-Distortion-Perception Optimization",
@@ -656,7 +656,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:605ef90fc110392b4d05f4c348fcfca1dac52430": {
     "title": "FlowCodec: One-Step Flow Prior for Generative Image Compression",
@@ -733,7 +733,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-18"
+    "last_seen": "2026-10-29"
   },
   "title:99d409bc4b97cea7ce4a18ccdff1416336db436e": {
     "title": "Diff-ICMH: Harmonizing machine and human vision in image compression with generative prior",
@@ -807,7 +807,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:4d285f884ee081127839924248220c9456c89fc1": {
     "title": "Next-frame decoding for ultra-low-bitrate image compression with video diffusion priors",
@@ -925,7 +925,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:106d4d7281a1fc5e2eb5438bb9d3c37e816b497f": {
     "title": "Frozen Decoder, Better Bits: Per-Image Latent Rate-Distortion Optimization for Ultra-Low Bitrate Compression",
@@ -959,7 +959,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:734c6a44b4a2b64ce130717bb62ea186c44a5e23": {
     "title": "ResARC: Residual-Aware AutoRegressive Coding for Ultra-Low Bitrate Image Compression",
@@ -1009,7 +1009,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28",
+    "last_seen": "2026-10-29",
     "scholar_cited_by": null,
     "scholar_versions": 2,
     "scholar_result_id": "Ei3uzVmD1igJ"
@@ -1163,7 +1163,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-27"
+    "last_seen": "2026-10-29"
   },
   "title:b0c97fc073466d4f15b51a754b7dc75faafb902f": {
     "title": "Exploiting Semantic and Pixel Representations for Ultra-Low Bitrate Image Compression",
@@ -1378,7 +1378,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:ad1dc6aefe91108d938a870ef8ce7a5c8d3d54ce": {
     "title": "Quantum-Enhanced VQ-VAE for Efficient Medical Image Compression",
@@ -1483,7 +1483,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:81067220468fa088b4d1eaa034f73df2bff93fe4": {
     "title": "Distributed Image Compression with Multimodal Side Information at Extremely Low Bitrates",
@@ -1590,7 +1590,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:ac9a64d32fddd476e1ffaa244cfd93936962b474": {
     "title": "Adaptive Fused Prior Transfer for Controllable Generative Image Compression",
@@ -1625,7 +1625,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-03",
-    "last_seen": "2026-10-21"
+    "last_seen": "2026-10-29"
   },
   "title:8bd6c0dbd7e4dcd217a46ecdb975a168a3705e2f": {
     "title": "CoD-Lite: Real-Time Diffusion-Based Generative Image Compression",
@@ -1842,7 +1842,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-06",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:815d84c1e8ccabeb36fc63d37a0e44114a20bf7c": {
     "title": "Mitigating Padding-Induced Degradation in Learned Image Compression via Gated Edge Adapter Tuning",
@@ -2014,7 +2014,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-12",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:edfe99ada380fe36b757f85cbb017f1dd6423ddb": {
     "title": "COLOR IMAGE COMPRESSION USING VECTOR QUANTIZATION WITH FUZZY LOGIC",
@@ -2048,7 +2048,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-12",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:40f8fe1300607878759998155e77a77e48db3a8f": {
     "title": "Ultra-low bitrate perceptual image compression with shallow encoder",
@@ -2084,7 +2084,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-13",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:a9565de4793a913981f33f97eca3ca99725c8a2c": {
     "title": "Efficient Image Compression and Reconstruction using VQ-VAE with Adaptive Codebook and Diffusion Decoder",
@@ -2318,7 +2318,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-15",
-    "last_seen": "2026-10-28",
+    "last_seen": "2026-10-29",
     "scholar_cited_by": null,
     "scholar_versions": null,
     "scholar_result_id": "dCTeoGyIOdgJ"
@@ -2391,7 +2391,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-18",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:b38e36045fdd433f8a34fe9f6156b9c95a80fc97": {
     "title": "Bandwidth-Compliant Learned Image Compression for Remote Sensing Image Downlink",
@@ -2459,7 +2459,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-18",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:b4f17e690c883211903925e416dd316736c56769": {
     "title": "Towards 1000-fold Electron Microscopy Image Compression for Connectomics via VQ-VAE with Transformer Prior",
@@ -2563,7 +2563,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-19",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:f964963b256ebdee946591c53e52718bdcac44d7": {
     "title": "Low-Complexity Parallel Decoding for Non-Autoregressive Learned Image Compression",
@@ -2600,7 +2600,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-19",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:54167b2c0999ab5183d38ad02457c402b3c62c5b": {
     "title": "Dual-Branch Learned Image Compression with Conditional Entropy Modeling and Deformable Convolution-based Attention",
@@ -2637,7 +2637,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-19",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:c59ec81a38e88154db7ec8a61ce7435898e0a0c2": {
     "title": "DHVQ: Dynamic Codebook Learning with Hierarchical Quantization for Efficient Neural Image Compression",
@@ -2762,7 +2762,7 @@
     "scholar_cited_by": null,
     "scholar_versions": null,
     "first_seen": "2026-10-20",
-    "last_seen": "2026-10-28",
+    "last_seen": "2026-10-29",
     "scholar_result_id": "wczEOwbgRQkJ"
   },
   "title:1ee3c46c91e4be4fd6fccd805ad67e7e24544029": {
@@ -2917,7 +2917,7 @@
     "scholar_cited_by": null,
     "scholar_versions": null,
     "first_seen": "2026-10-21",
-    "last_seen": "2026-10-28",
+    "last_seen": "2026-10-29",
     "scholar_result_id": "6k1FwQiijiYJ"
   },
   "title:d0ebe3fc8d6e9f8089b0c94881f753f979574413": {
@@ -2965,7 +2965,7 @@
     "scholar_cited_by": null,
     "scholar_versions": null,
     "first_seen": "2026-10-21",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:cb5ea594cae4171fbda943547860bb5425905e34": {
     "title": "MRT: Learning Compact Representations with Mixed RWKV-Transformer for Extreme Image Compression",
@@ -3090,7 +3090,7 @@
     "scholar_cited_by": null,
     "scholar_versions": null,
     "first_seen": "2026-10-22",
-    "last_seen": "2026-10-28",
+    "last_seen": "2026-10-29",
     "scholar_result_id": "WBzynZiJ3rYJ"
   },
   "title:166cfec4458e9dc2a659fc4c5d6842af180802ef": {
@@ -3130,7 +3130,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-22",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:c7d323c8edbd7a0f119269f6ab72dc86fbcb4a41": {
     "title": "Improving perceptual quality in low-bitrate remote sensing image compression via codebook priors and adversarial learning",
@@ -3198,7 +3198,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-23",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:821c2542ef132cc16e496bd8221b913193cfe7ad": {
     "title": "MTIC: Mamba-Transformer Synergy with Shared Adaptive Context for Image Compression",
@@ -3236,7 +3236,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-24",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:61d148d591627c517457ae22c75fe0ebcfeed9eb": {
     "title": "Tree-VQ: Progressive Image Compression from Pretrained Vector Quantizers",
@@ -3275,7 +3275,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-24",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:13955587e0d7176e5b7976e6b45856a4dae176d9": {
     "title": "SDGIC: A Semantic Disambiguation-Guided Generative Image Compression Method for Ultra-Low Bitrates",
@@ -3352,7 +3352,7 @@
       "arXiv"
     ],
     "first_seen": "2026-10-26",
-    "last_seen": "2026-10-28",
+    "last_seen": "2026-10-29",
     "scholar_cited_by": null,
     "scholar_versions": null
   },
@@ -3388,7 +3388,7 @@
       "Google Scholar"
     ],
     "first_seen": "2026-10-26",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29"
   },
   "title:71e2273a0979dfcf2202f6fd2ca61f79120d8502": {
     "title": "Semantic-Guided Frequency Modulation for Learned Image Compression",
@@ -3425,7 +3425,9 @@
       "arXiv"
     ],
     "first_seen": "2026-10-28",
-    "last_seen": "2026-10-28"
+    "last_seen": "2026-10-29",
+    "scholar_cited_by": null,
+    "scholar_versions": null
   },
   "title:4c4bb7ef7c47c5ccbb8d630fb9fb06b5dea336e5": {
     "title": "HVQ-CGIC: Enabling Hyperprior Entropy Modeling for VQ-Based Controllable Generative Image Compression",
