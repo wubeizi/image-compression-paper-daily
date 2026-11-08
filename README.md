@@ -3,9 +3,9 @@
 > High-precision daily reading list for learned, generative, low-bitrate image compression and vector quantization.
 > Sources: arXiv + Google Scholar (via SerpApi). OpenAlex is not used.
 
-**Last updated:** 2026-11-07 14:51 JST
+**Last updated:** 2026-11-08 14:54 JST
 
-**Unique papers this run:** 40  |  **New papers:** 0
+**Unique papers this run:** 40  |  **New papers:** 1
 
 ## Collection policy
 
@@ -24,7 +24,11 @@
 
 ## New papers
 
-No previously unseen papers were detected.
+### Vector Quantization
+
+| Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
+|---|---|---|---|---|---|---|---|
+| 2026 | **NEW** A Vector Quantization Image Compression Technique for Ultra-Low Bit Rate Image Transmission | S Wei, N Wu, X Wang | VQ/RVQ | [Paper](https://ieeexplore.ieee.org/abstract/document/11755286/) | - | - | Google Scholar |
 
 ## Latest papers by topic
 
@@ -33,9 +37,9 @@ No previously unseen papers were detected.
 | Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
 |---|---|---|---|---|---|---|---|
 | 2027 | KALIC: Kolmogorov-Arnold Learned Image Codec | T El Idrissi, BB Damodaran, F Schnitzler | - | [Paper](https://inria.hal.science/hal-05844160/) | - | - | Google Scholar |
-| 2026-11-07 | Benchmarking Neural Image Compression with DCT-Based Spectral Diagnostics | N Kalmykov, R Dibo, Y Liu et al. | - | [Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7553244) | - | - | Google Scholar |
-| 2026-11-07 | End-to-End Learned Image Compression: Approaches, Deployment, and Standardization | J Kraiem, Z Chen | - | [Paper](https://jasserkraiem.com/papers/learned-image-compression-kraiem.pdf) | - | - | Google Scholar |
-| 2026-11-07 | MTIC: Mamba-Transformer Synergy with Shared Adaptive Context for Image Compression | D Li, Y Bai, K Wang et al. | Transformer | [Paper](https://dl.acm.org/doi/abs/10.1145/3859249) | - | - | Google Scholar |
+| 2026-11-08 | Benchmarking Neural Image Compression with DCT-Based Spectral Diagnostics | N Kalmykov, R Dibo, Y Liu et al. | - | [Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7553244) | - | - | Google Scholar |
+| 2026-11-08 | End-to-End Learned Image Compression: Approaches, Deployment, and Standardization | J Kraiem, Z Chen | - | [Paper](https://jasserkraiem.com/papers/learned-image-compression-kraiem.pdf) | - | - | Google Scholar |
+| 2026-11-08 | MTIC: Mamba-Transformer Synergy with Shared Adaptive Context for Image Compression | D Li, Y Bai, K Wang et al. | Transformer | [Paper](https://dl.acm.org/doi/abs/10.1145/3859249) | - | - | Google Scholar |
 | 2026-11-05 | Neural Image Compression with Internal-External Prior Fusion and Alignment | Tiancheng Si, Wenlong Xu, Dahua Gao | Entropy model | [Paper](http://arxiv.org/abs/2611.07644v1) | [GitHub](https://github.com/stcnjtech/DCVC-X-Intra) | - | arXiv |
 | 2026-11-05 | Flux as a Codec: Zero-Shot Lossy Compression with Flux | Fuma Kimishima, Jinjia Zhou | Diffusion | [Paper](http://arxiv.org/abs/2611.07929v1) | - | - | arXiv |
 | 2026-10-24 | Semantic-Guided Frequency Modulation for Learned Image Compression | Gangyi Tian, Wen Ji, Alireza Furutanpey et al. | - | [Paper](http://arxiv.org/abs/2610.33616v1) | - | - | arXiv, Google Scholar |
@@ -49,7 +53,7 @@ No previously unseen papers were detected.
 
 | Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
 |---|---|---|---|---|---|---|---|
-| 2026-11-07 | Supplementary Material for Adaptive Fused Prior Transfer for Controllable Generative Image Compression | Y Pei, Y Liu, N Ling | Generative | [Paper](https://www.researchgate.net/profile/Yifei-Pei-7/publication/415323795_Adaptive_Fused_Prior_Transfer_for_Controllable_Generative_Image_Compression_Supplementary_Materialspdf/data/6ac600cb5770bb0daeda77f2/Adaptive-Fused-Prior-Transfer-for-Controllable-Generative-Image-Compression-Supplementary-Materials.pdf) | - | - | Google Scholar |
+| 2026-11-08 | Supplementary Material for Adaptive Fused Prior Transfer for Controllable Generative Image Compression | Y Pei, Y Liu, N Ling | Generative | [Paper](https://www.researchgate.net/profile/Yifei-Pei-7/publication/415323795_Adaptive_Fused_Prior_Transfer_for_Controllable_Generative_Image_Compression_Supplementary_Materialspdf/data/6ac600cb5770bb0daeda77f2/Adaptive-Fused-Prior-Transfer-for-Controllable-Generative-Image-Compression-Supplementary-Materials.pdf) | - | - | Google Scholar |
 | 2026-10-21 | Efficient Generative Image Compression with Quantized Latents Refinement | Hao Cao, Yinhuan Huang, Wenqi Guo et al. | Diffusion, Generative, VQ/RVQ, Perceptual, Low bitrate, Data=KODAK | [Paper](http://arxiv.org/abs/2610.29691v1) | - | - | arXiv, Google Scholar |
 | 2026-10-19 | BitFlat: Error-Localized Bitstream Design for Robust Diffusion Image Compression | Xinfeng Deng, Li Zhou, Haitao Chen et al. | Diffusion, Perceptual, Low bitrate, Data=KODAK, CLIC, DIV2K, Generative | [Paper](http://arxiv.org/abs/2610.25682v1) | - | - | arXiv, Google Scholar |
 | 2026 | Dual-Constrained Diffusion Image Compression for Operational Rate-Distortion-Perception Optimization | S Jiang, J Katto, H Sun | Diffusion | [Paper](https://arxiv.org/abs/2606.13366) | - | - | Google Scholar |
@@ -66,8 +70,8 @@ No previously unseen papers were detected.
 
 | Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
 |---|---|---|---|---|---|---|---|
-| 2026-11-07 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
-| 2026-11-07 | Frozen Decoder, Better Bits: Per-Image Latent Rate-Distortion Optimization for Ultra-Low Bitrate Compression | CY Chen, R Sivakumar | Low bitrate | [Paper](https://openreview.net/forum?id=U9w7HZlK0i) | - | - | Google Scholar |
+| 2026-11-08 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
+| 2026-11-08 | Frozen Decoder, Better Bits: Per-Image Latent Rate-Distortion Optimization for Ultra-Low Bitrate Compression | CY Chen, R Sivakumar | Low bitrate | [Paper](https://openreview.net/forum?id=U9w7HZlK0i) | - | - | Google Scholar |
 | 2026-10-21 | Efficient Generative Image Compression with Quantized Latents Refinement | Hao Cao, Yinhuan Huang, Wenqi Guo et al. | Diffusion, Generative, VQ/RVQ, Perceptual, Low bitrate, Data=KODAK | [Paper](http://arxiv.org/abs/2610.29691v1) | - | - | arXiv |
 | 2026-10-19 | PerQ: Inverse Generative Modeling for Neural Image Compression via Quantization Error Compensation | Tianhao Peng, Ho Man Kwan, Fan Zhang et al. | Generative, Perceptual, Low bitrate, Data=KODAK, CLIC | [Paper](http://arxiv.org/abs/2610.27374v1) | - | - | arXiv |
 | 2026-10-19 | Channel-Level Mask Guidance for Slimmable Image Compression | Chen Chen, Chenggang Wu, Yongbiao Chen et al. | Hyperprior, Low bitrate, Data=KODAK | [Paper](http://arxiv.org/abs/2610.27037v1) | [GitHub](https://github.com/sjtu-tcloud/MGSIC) | - | arXiv |
@@ -75,23 +79,23 @@ No previously unseen papers were detected.
 | 2026-10-13 | Recasting DiT for Extreme Image Compression with Hierarchical Visual Priors | Yunuo Chen, Jingnan Gao, Bing He et al. | Diffusion, Transformer, Data=KODAK, CLIC, DIV2K, Entropy model, Perceptual, Low bitrate | [Paper](http://arxiv.org/abs/2610.18607v1) | - | - | arXiv, Google Scholar |
 | 2026 | Joint Degradation-Aware Arbitrary-Scale Super-Resolution for Variable-Rate Extreme Image Compression | X Chai, Z Cheng, X Li et al. | Low bitrate | [Paper](https://ieeexplore.ieee.org/abstract/document/11475314/) | - | 1 | Google Scholar |
 | 2026 | ResARC: Residual-Aware AutoRegressive Coding for Ultra-Low Bitrate Image Compression | Q Yan, R Dong, Y Xie et al. | Generative, Entropy model, Low bitrate | [Paper](https://arxiv.org/abs/2609.39451) | - | - | Google Scholar |
-| 2026 | TextBoost: Boosting Scene Text Fidelity in Ultra-low Bitrate Image Compression | B Wang, Y Lan, Z Sun et al. | Low bitrate | [Paper](https://arxiv.org/abs/2603.04115) | - | 1 | Google Scholar |
 | 2026 | Ultra-Low Bitrate Image Compression with Dual-Branch Hybrid Attention and Multi-Scale Entropy Modeling | S Yue, Z Chen, D Yu et al. | Entropy model, Transformer, Low bitrate | [Paper](https://ieeexplore.ieee.org/abstract/document/11703934/) | - | - | Google Scholar |
 | 2026 | LoViF 2026 challenge on ultra-low bitrate image compression: Methods and results | X Ling, C Zhou, X Li et al. | Low bitrate | [Paper](https://openreview.net/forum?id=CSFBAUIvM4) | - | 3 | Google Scholar |
+| 2026 | Exploiting Semantic and Pixel Representations for Ultra-Low Bitrate Image Compression | H Wei, Y Zhou, C Ge et al. | Low bitrate | [Paper](https://arxiv.org/abs/2606.01608) | - | 1 | Google Scholar |
 
 ## Vector Quantization
 
 | Date/Year | Title | Authors | Signals | Paper | Code | GS Cites | Source |
 |---|---|---|---|---|---|---|---|
-| 2026-11-07 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | VQ/RVQ, Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
-| 2026-11-07 | COLOR IMAGE COMPRESSION USING VECTOR QUANTIZATION WITH FUZZY LOGIC | H Adnan, HA Al-jashamy | VQ/RVQ | [Paper](https://cervantes.erdospublish.org/archive/2025/turcomat.2025.16.issue-1/TURCOMAT.2025.1.00005/Color_Image_Compression_Using_Vector_Quantization_with_Fuzzy_Logic.pdf) | - | - | Google Scholar |
+| 2026-11-08 | Reproducibility-First Ultra-Low Bitrate Image Compression with an Entropy-Coded AEIC Codec | F Zhou, H Na, P Zhao | VQ/RVQ, Low bitrate | [Paper](https://openreview.net/pdf?id=jb43xbjJAF) | - | - | Google Scholar |
+| 2026-11-08 | COLOR IMAGE COMPRESSION USING VECTOR QUANTIZATION WITH FUZZY LOGIC | H Adnan, HA Al-jashamy | VQ/RVQ | [Paper](https://cervantes.erdospublish.org/archive/2025/turcomat.2025.16.issue-1/TURCOMAT.2025.1.00005/Color_Image_Compression_Using_Vector_Quantization_with_Fuzzy_Logic.pdf) | - | - | Google Scholar |
 | 2026-10-21 | Efficient Generative Image Compression with Quantized Latents Refinement | Hao Cao, Yinhuan Huang, Wenqi Guo et al. | Diffusion, Generative, VQ/RVQ, Perceptual, Low bitrate, Data=KODAK | [Paper](http://arxiv.org/abs/2610.29691v1) | - | - | arXiv, Google Scholar |
 | 2026 | VQ-LIC: Shared Vector-Quantized Learned Image Compression on a Resource-Constrained FPGA | MFI Bhatti, AB Faisal, A Usman et al. | VQ/RVQ | [Paper](https://arxiv.org/abs/2609.29727) | - | - | Google Scholar |
 | 2026 | Tree-VQ: Progressive Image Compression from Pretrained Vector Quantizers | M Ma, X Wang, T Xu et al. | Generative, VQ/RVQ | [Paper](https://arxiv.org/abs/2609.03641) | - | - | Google Scholar |
 | 2026 | Clustered Codebook Quantization for 2D Gaussian-based Image Compression | R Cheng, Y Zhan, J Spjut et al. | VQ/RVQ | [Paper](https://arxiv.org/abs/2607.05667) | - | 1 | Google Scholar |
 | 2026 | Tree-Structured Vector Quantization For Efficient And Progressive Image Compression | X Wang, T Xu, Q Luo et al. | VQ/RVQ | [Paper](https://ui.adsabs.harvard.edu/abs/2026arXiv260903641W/abstract) | - | - | Google Scholar |
+| 2026 | A Vector Quantization Image Compression Technique for Ultra-Low Bit Rate Image Transmission | S Wei, N Wu, X Wang | VQ/RVQ | [Paper](https://ieeexplore.ieee.org/abstract/document/11755286/) | - | - | Google Scholar |
 | 2026 | Hybrid Lossy Image Compression Using Bilateral Filtering, Vector Quantization, and Entropy Coding | IH Kadhim, A Fanfakh, EH Alwan | VQ/RVQ | [Paper](https://www.researchgate.net/profile/Ahmed-Fanfakh/publication/414642549_Hybrid_Lossy_Image_Compression_Using_Bilateral_Filtering_Vector_Quantization_and_Entropy_Coding/links/6ab8c335b6ed5276291a0de3/Hybrid-Lossy-Image-Compression-Using-Bilateral-Filtering-Vector-Quantization-and-Entropy-Coding.pdf) | - | - | Google Scholar |
-| 2026 | HCLD: Physics-aware and metadata-adaptive latent diffusion for high-fidelity medical image compression | L Zhou, Y Zhou, W Yu et al. | Diffusion, VQ/RVQ | [Paper](https://link.springer.com/article/10.1007/s11760-026-05503-2) | - | - | Google Scholar |
 | 2026 | Architectural and Mathematical Foundations of Transform Coding in Image Compression: From Multiresolution Wavelet Pyramids to Hardware-Accelerated … | GK Tummala | VQ/RVQ | [Paper](https://www.tdcommons.org/cgi/viewcontent.cgi?article=12828&context=dpubs_series) | - | - | Google Scholar |
 | 2026 | A Decomposition-based Micro-GA Local Search for Bi-Objective Codebook Design | R Solar-Hernández, L Rosas-Ordaz | VQ/RVQ, Data=KODAK | [Paper](https://dl.acm.org/doi/abs/10.1145/3795101.3814710) | - | - | Google Scholar |
 
